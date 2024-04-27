@@ -1,21 +1,29 @@
-package Model;
+package com.example.eksamensprojekt.Model;
 
 public class User {
     private String username;
     private String password;
-    private int role_ID;
+    private String role;
     private int user_ID;
 
+    public User(){
 
-    public User(String username, String password, int role_ID, int user_ID){
-        this.username=username;
-        this.password=password;
-        this.role_ID =role_ID;
-        this.user_ID=user_ID;
     }
 
-    public int getRole_ID() {
-        return role_ID;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     public String getPassword() {
