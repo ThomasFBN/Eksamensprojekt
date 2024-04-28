@@ -37,8 +37,9 @@ public class UserController {
             if (user!=null && user.getRole().equals("admin")){
                 session.setAttribute("user", user);
                 return "redirect:/admin";
-            } else if (user!=null && user.getRole().equals("user")) {
-                return "redirect:/user";
+            } else if (user!=null && user.getRole().equals("employee")) {
+                session.setAttribute("user", user);
+                return "redirect:/employee";
             } else {
                 model.addAttribute("error", "invalid");
                 return "home";
@@ -52,6 +53,15 @@ public class UserController {
         User user = (User) session.getAttribute("user");
         if (user!=null && user.getRole().equals("admin")){
             return "admin";
+        } else {
+            return "redirect:/";
+        }
+    }
+    @GetMapping("/employee")
+    public String employee(HttpSession session, Model model){
+        User user = (User) session.getAttribute("user");
+        if (user!=null && user.getRole().equals("employee")){
+            return "employee";
         } else {
             return "redirect:/";
         }
