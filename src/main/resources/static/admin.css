@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
 
-
 html {
     height: 100%;
 }
@@ -65,6 +64,7 @@ nav {
     justify-content: space-between;
     padding-top: 32px;
 }
+
 h1 {
     display: flex;
     justify-content: center;
@@ -102,4 +102,114 @@ h1 {
 
 .action-links a {
     color: #fff;
+}
+
+h2 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+}
+
+.create-box {
+    position: relative;
+    width: 500px;
+    height: 650px;
+    background-image: linear-gradient(45deg, #21D4FD 0%, #B721FF 100%);
+    border: 1.5px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 40%;
+}
+
+.input-box, .role-box {
+    position: relative;
+    width: 300px;
+    margin: 40px 10px;
+}
+
+.input-box label, .role-box label {
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+    font-weight: bold;
+
+}
+
+.input-box input, .role-box input {
+    width: 100%;
+    height: 40px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 1em;
+    padding: 0 38px 0 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.input-box input[type="text"],
+.input-box input[type="password"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 40px;
+    background: transparent;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+    outline: none;
+    display: flex;
+    justify-content: center;
+}
+
+.role-box {
+    align-items: center;
+}
+
+.role-box label {
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.role-options {
+    display: flex;
+}
+
+.role-options input[type="radio"] {
+    margin-right: 5px;
+}
+
+.role-options label {
+    display: flex;
+    align-items: center;
+}
+
+h3 {
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+}
+
+.create-box input[type="submit"] {
+    width: 100%;
+    height: 40px;
+    background: #1ABAEF;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+    justify-content: center;
+    font-family: 'Nunito', sans-serif;
+}
+
+.create-box input[type="submit"]:hover {
+    background-color: #1ABAEF;
+    transform: perspective(1px) scale3d(1.044, 1.044, 1) translateZ(0) !important;
 }
