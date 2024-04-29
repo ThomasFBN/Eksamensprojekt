@@ -3,6 +3,7 @@ package com.example.eksamensprojekt.Controller;
 import com.example.eksamensprojekt.Model.User;
 import com.example.eksamensprojekt.Service.UserService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

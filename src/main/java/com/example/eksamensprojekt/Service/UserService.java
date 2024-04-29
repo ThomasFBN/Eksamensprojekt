@@ -10,6 +10,9 @@ import java.sql.SQLException;
 public class UserService {
     private UserRepository userRepository;
 
+    public UserService(UserRepository userRepository){
+        this.userRepository=userRepository;
+    }
     public User checkLogin(String username, String password)throws SQLException{
       return userRepository.checkLogin(username, password);
     }
