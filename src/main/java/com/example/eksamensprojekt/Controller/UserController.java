@@ -7,10 +7,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -41,8 +43,8 @@ public class UserController {
                 session.setAttribute("user", user);
                 return "redirect:/employee";
             } else if (user != null && user.getRole().equals("pjManager")) {
-            session.setAttribute("user", user);
-            return "redirect:/projectManager";
+                session.setAttribute("user", user);
+                return "redirect:/projectManager";
             } else {
                 model.addAttribute("error", "invalid");
                 return "home";
@@ -72,6 +74,7 @@ public class UserController {
             return "redirect:/";
         }
     }
+
     @GetMapping("/projectManager")
     public String projectManager(HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
@@ -81,4 +84,28 @@ public class UserController {
             return "redirect:/";
         }
     }
+
+    @GetMapping("/createUser")
+    public String createUser(Model model) {
+        User defaultUser = new User();
+        model.addAttribute("user", defaultUser);
+        return "createUser";
+
+
+    }
+
+    @PostMapping("/createUser")
+    public String postCreateUser(@ModelAttribute User user) throws SQLException {
+        userService.createUser(user);
+        return "redirect:/admin";
+    }
+   @GetMapping("/showUsers")
+   public String showUsers(Model model) throws SQLException {
+       List<User> users = userService.showAllUsers();
+       model.addAttribute("users", users);
+       return "showUsers";
+   }
 }
+
+
+

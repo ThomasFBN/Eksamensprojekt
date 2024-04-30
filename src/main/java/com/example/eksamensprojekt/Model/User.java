@@ -1,10 +1,13 @@
 package com.example.eksamensprojekt.Model;
 
+import java.util.List;
+
 public class User {
     private String username;
     private String password;
     private String role;
     private int user_ID;
+    private List<User> Userlist;
 
     public User(){
 
