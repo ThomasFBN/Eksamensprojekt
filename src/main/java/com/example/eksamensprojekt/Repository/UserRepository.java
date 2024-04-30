@@ -51,7 +51,7 @@ public class UserRepository {
     public void createUser(User user) throws SQLException {
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
         {
-            String SQL = "INSERT INTO Users (username,password, user_id,role) VALUES (?,?,?)";
+            String SQL = "INSERT INTO Users (username,password,role) VALUES (?,?,?)";
             try (PreparedStatement ps = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, user.getUsername());
                 ps.setString(2, user.getPassword());
@@ -68,7 +68,7 @@ public class UserRepository {
     }
 
     public List<User> showAllUsers() throws SQLException {
-        List<User> users = new ArrayList<>();
+        List<User> userList = new ArrayList<>();
         Connection connection = DriverManager.getConnection(db_url, db_username, db_password);
         String SQL = "SELECT * FROM Users";
         try (PreparedStatement ps = connection.prepareStatement(SQL)) {
@@ -79,11 +79,11 @@ public class UserRepository {
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setRole(rs.getString("role"));
-                users.add(user);
+                userList.add(user);
             }
 
         }
-        return users;
+        return userList;
     }
 
 }

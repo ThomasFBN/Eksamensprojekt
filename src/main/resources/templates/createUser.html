@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="../static/admin.css">
+    <link th:href="@{/admin.css}" rel="stylesheet">
 </head>
 <header>
     <nav class="container">
@@ -49,16 +49,17 @@
 </div>
 
 <div class="create-box">
-    <form action="">
+    <form method="post" th:action="@{/createUser}">
         <h2>Create user</h2>
         <div class="input-box">
-            <label for="name">Name</label>
-            <input type="text" id="name" placeholder="Name" required>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Username" required>
         </div>
         <div class="input-box">
             <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Password" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
         </div>
+
         <div class="role-box">
            <h3>Role</h3>
             <div class="role-options">

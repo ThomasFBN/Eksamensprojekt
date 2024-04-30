@@ -101,8 +101,8 @@ public class UserController {
     }
    @GetMapping("/showUsers")
    public String showUsers(Model model) throws SQLException {
-       List<User> users = userService.showAllUsers();
-       model.addAttribute("users", users);
+       List<User> userList = userService.showAllUsers();
+       model.addAttribute("userList", userList);
        return "showUsers";
    }
 }

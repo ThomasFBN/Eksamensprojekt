@@ -7,7 +7,7 @@ public class User {
     private String password;
     private String role;
     private int user_ID;
-    private List<User> Userlist;
+    private List<User> userList;
 
     public User(){
 
@@ -43,5 +43,12 @@ public class User {
 
     public void setUser_ID(int user_ID) {
         this.user_ID = user_ID;
+    }
+    public void setuserList(List<User> userList) {
+        userList = userList;
+    }
+
+    public List<User> getuserList() {
+        return userList;
     }
 }

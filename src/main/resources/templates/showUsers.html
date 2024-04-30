@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link th:href="@{/admin.css}" rel="stylesheet">
 </head>
 <body>
-
+<div class="background">
+</div>
+<h2>Users:</h2>
+<table class="wishlist-table">
+    <tr th:each="user : ${userList}" class="user-row">
+        <td>
+            <a th:href="@{'/showUsers/' + ${user.user_ID}}">
+                <p th:text="${user.username}"></p>
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td class="show-wishlist-box">
+            <a href="/create" th:href="@{/create}">
+                <button>Create New User</button>
+            </a>
+            <a href="/admin" th:href="@{/admin}">
+                <button>Back to admin page</button>
+            </a>
+        </td>
+    </tr>
+</table>
 </body>
 </html>
