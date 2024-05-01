@@ -9,17 +9,32 @@
 <div class="background">
 </div>
 <h2>Users:</h2>
-<table class="wishlist-table">
+<table class="showAll-table">
+    <tr>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Role</th>
+    </tr>
     <tr th:each="user : ${userList}" class="user-row">
         <td>
             <a th:href="@{'/showUsers/' + ${user.user_ID}}">
                 <p th:text="${user.username}"></p>
             </a>
         </td>
+        <td>
+            <a th:href="@{'/showUsers/' + ${user.user_ID}}">
+                <p th:text="${user.password}"></p>
+            </a>
+        </td>
+        <td>
+            <a th:href="@{'/showUsers/' + ${user.user_ID}}">
+                <p th:text="${user.role}"></p>
+            </a>
+        </td>
     </tr>
     <tr>
-        <td class="show-wishlist-box">
-            <a href="/create" th:href="@{/create}">
+        <td class="show-all-box">
+            <a href="/createUser" th:href="@{/createUser}">
                 <button>Create New User</button>
             </a>
             <a href="/admin" th:href="@{/admin}">
