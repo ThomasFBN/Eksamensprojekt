@@ -91,7 +91,6 @@ public class UserController {
         model.addAttribute("user", defaultUser);
         return "createUser";
 
-
     }
 
     @PostMapping("/createUser")
