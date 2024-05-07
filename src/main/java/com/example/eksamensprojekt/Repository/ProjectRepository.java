@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
 @Repository
 public class ProjectRepository {
     private Project project;
@@ -38,5 +41,30 @@ public class ProjectRepository {
             }
         }
     }
+    public List<Project> showProjects() throws SQLException {
+        List<Project> projects = new ArrayList<>();
+        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
+
+        String SQL = "SELECT *, (SELECT COUNT(*) FROM tasks WHERE project_id = projects.project_id) " +
+                "AS task_count, (SELECT COUNT(*) FROM users WHERE user_id = projects.user_id) " +
+                "AS user_count FROM projects";
+        try (PreparedStatement projectsPS = connection.prepareStatement(SQL)) {
+            ResultSet projectsRS = projectsPS.executeQuery();
+            while (projectsRS.next()) {
+                Project project = new Project();
+                project.setProject_id(projectsRS.getInt("project_id"));
+                project.setProjectName(projectsRS.getString("projectName"));
+                project.setStatus(projectsRS.getString("status"));
+
+                project.setTaskCount(projectsRS.getInt("task_count"));
+                project.setUserCount(projectsRS.getInt("user_count"));
+
+                projects.add(project);
+            }
+        }
+
+        return projects;
+    }
+
 
 }

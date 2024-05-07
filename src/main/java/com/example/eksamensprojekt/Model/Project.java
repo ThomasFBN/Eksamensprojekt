@@ -4,15 +4,15 @@ public class Project {
     private String projectName;
     private int project_id;
     private String status;
-    private int task_id;
-    private int user_id;
+    private int taskCount;
+    private int userCount;
 
-    public Project(String projectName, int project_id, String status, int task_id, int user_id) {
+
+    public Project(String projectName, int project_id, String status) {
         this.projectName = projectName;
         this.project_id = project_id;
         this.status = status;
-        this.task_id = task_id;
-        this.user_id = user_id;
+
     }
 
     public Project(String projectName) {
@@ -35,14 +35,6 @@ public class Project {
     }
 
 
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public int getTask_id() {
-        return task_id;
-    }
-
     public void setProjectName(String projectName) {
         this.projectName = projectName;
     }
@@ -54,13 +46,20 @@ public class Project {
     public void setStatus(String status) {
         this.status = status;
     }
-
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setTaskCount(int taskCount) {
+        this.taskCount = taskCount;
     }
 
-    public void setTask_id(int task_id) {
-        this.task_id = task_id;
+    public void setUserCount(int userCount) {
+        this.userCount = userCount;
     }
+    public int getTaskCount() {
+        return taskCount;
+    }
+
+    public int getUserCount() {
+        return userCount;
+    }
+
+
 }

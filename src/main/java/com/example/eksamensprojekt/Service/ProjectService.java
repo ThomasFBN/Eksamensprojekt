@@ -6,6 +6,7 @@ import com.example.eksamensprojekt.Repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Service
 public class ProjectService {
@@ -18,5 +19,7 @@ public class ProjectService {
     public void createProject(Project project, int user_id) throws SQLException {
         projectRepository.createProject(project,user_id);
     }
-
+    public List<Project> showProjects() throws SQLException {
+        return projectRepository.showProjects();
+    }
 }
