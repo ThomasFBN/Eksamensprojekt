@@ -1,69 +1,71 @@
 package com.example.eksamensprojekt.Model;
 
-import java.time.LocalDate;
-
 public class Task {
+    private int taskId;
+    private int subProjectId;
     private String taskName;
-    private int task_id;
-    private int project_id;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private int estTime;
+    private String description;
     private String status;
+    private int userId;
+
+    public Task() {
+    }
+
+    public Task(int subProjectId, String taskName, String description, String status, int userId) {
+        this.subProjectId = subProjectId;
+        this.taskName = taskName;
+        this.description = description;
+        this.status = status;
+        this.userId = userId;
+    }
+
+    // Getters
+    public int getTaskId() {
+        return taskId;
+    }
+
+    public int getSubProjectId() {
+        return subProjectId;
+    }
 
     public String getTaskName() {
         return taskName;
     }
 
-    public int getTask_id() {
-        return task_id;
-    }
-
-    public int getProject_id() {
-        return project_id;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public int getEstTime() {
-        return estTime;
+    public String getDescription() {
+        return description;
     }
 
     public String getStatus() {
         return status;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    // Setters
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
+    }
+
+    public void setSubProjectId(int subProjectId) {
+        this.subProjectId = subProjectId;
+    }
+
     public void setTaskName(String taskName) {
         this.taskName = taskName;
     }
 
-    public void setTask_id(int task_id) {
-        this.task_id = task_id;
-    }
-
-    public void setProject_id(int project_id) {
-        this.project_id = project_id;
-    }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public void setEstTime(int estTime) {
-        this.estTime = estTime;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
