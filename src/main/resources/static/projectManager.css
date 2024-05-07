@@ -65,6 +65,7 @@ nav {
     justify-content: space-between;
     padding-top: 32px;
 }
+
 h1 {
     display: flex;
     justify-content: center;
@@ -99,7 +100,23 @@ h1 {
     cursor: pointer;
     border-radius: 5px;
 }
+
 .action-links a {
     color: #fff;
 }
 
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.table th {
+    border-bottom: solid 2px black;
+    padding: 3px;
+}
+.table td {
+    padding: 3px;
+    border:  solid black;
+}
+.table tbody tr:hover {
+    background-color: #fff;
+}
