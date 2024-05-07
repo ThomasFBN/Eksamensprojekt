@@ -6,10 +6,7 @@ import com.example.eksamensprojekt.util.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 @Repository
 public class TaskRepository {
@@ -23,19 +20,28 @@ public class TaskRepository {
 
 
     public void createTask(Task task) throws SQLException {
+        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
+
         String SQL = "INSERT INTO tasks (taskName, subproject_id, startDate, endDate, estTime, status, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
-             PreparedStatement statement = connection.prepareStatement(SQL)) {
-            statement.setString(1, task.getTaskName());
-            statement.setInt(2, task.getSubprojectId());
-            statement.setDate(3, Date.valueOf(task.getStartDate()));
-            statement.setDate(4, Date.valueOf(task.getEndDate()));
-            statement.setInt(5, task.getEstTime());
-            statement.setString(6, task.getStatus());
-            statement.setInt(7, task.getUserId());
-            statement.executeUpdate();
+
+        try (PreparedStatement ps = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, task.getTaskName());
+            ps.setInt(2, task.getSubprojectId());
+            ps.setDate(3, java.sql.Date.valueOf(task.getStartDate()));
+            ps.setDate(4, java.sql.Date.valueOf(task.getEndDate()));
+            ps.setInt(5, task.getEstTime());
+            ps.setString(6, task.getStatus());
+            ps.setInt(7, task.getUserId());
+
+            int rowsAffected = ps.executeUpdate();
+            ResultSet resultSet = ps.getGeneratedKeys();
+            if (resultSet.next()) {
+                long generatedId = resultSet.getLong(1);
+                task.setTaskId((int) generatedId);
+            }
         }
     }
+
 
 
 }
