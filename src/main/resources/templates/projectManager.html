@@ -51,8 +51,8 @@
 <h1>Signed in as Project Manager</h1>
 <div class="action.container">
     <div class="action-links">
-        <a href="/showProjects">
-            <h2>View ongoing project</h2>
+        <a th:href="@{'/showProjects/' + ${user.getUser_ID()}}">
+        <h2>View ongoing project</h2>
         </a>
         <form method="post" action="/projectManager">
             <label for="name">name</label>

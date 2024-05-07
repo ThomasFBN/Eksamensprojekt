@@ -11,8 +11,7 @@
     <thead>
     <tr>
         <th>Project Name</th>
-        <th>Subproject Name</th>
-        <th>Open Task</th>
+        <th>Number of Subprojects</th>
         <th>Number of Employees</th>
         <th>Status</th>
         <th>Edit/Delete</th>
@@ -20,12 +19,12 @@
     </thead>
     <tbody>
     <tr th:each="project : ${projectList}" class="project-row">
-       <td> <a th:href="@{'/#/' + ${project}}">
-            <p th:text="${project.projectName}"></p>
-        </a>
+        <td>
+            <a th:href="@{'/#/' + ${project}}">
+                <p th:text="${project.projectName}"></p>
+            </a>
         </td>
-        <td></td>
-        <td th:text="${project.taskCount}"></td>
+        <td th:text="${project.subProjectCount}"></td>
         <td th:text="${project.userCount}"></td>
         <td th:text="${project.status}"></td>
     </tr>

@@ -41,23 +41,32 @@ public class ProjectRepository {
             }
         }
     }
-    public List<Project> showProjects() throws SQLException {
+
+    public List<Project> findProjectsByUserId(int userId) throws SQLException {
         List<Project> projects = new ArrayList<>();
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
 
-        String SQL = "SELECT *, (SELECT COUNT(*) FROM tasks WHERE project_id = projects.project_id) " +
-                "AS task_count, (SELECT COUNT(*) FROM users WHERE user_id = projects.user_id) " +
-                "AS user_count FROM projects";
+        String SQL = "SELECT p.project_id, " +
+                "       p.projectName, " +
+                "       p.status, " +
+                "       COUNT(DISTINCT sp.subproject_id) AS subproject_count, " +
+                "       COUNT(DISTINCT t.user_id) AS user_count " +
+                "FROM projects p " +
+                "LEFT JOIN subprojects sp ON p.project_id = sp.project_id " +
+                "LEFT JOIN tasks t ON sp.subproject_id = t.subproject_id " +
+                "WHERE p.user_id = ? " +
+                "GROUP BY p.project_id, p.projectName, p.status";
+
         try (PreparedStatement projectsPS = connection.prepareStatement(SQL)) {
+            projectsPS.setInt(1, userId);
             ResultSet projectsRS = projectsPS.executeQuery();
             while (projectsRS.next()) {
                 Project project = new Project();
                 project.setProject_id(projectsRS.getInt("project_id"));
                 project.setProjectName(projectsRS.getString("projectName"));
                 project.setStatus(projectsRS.getString("status"));
-
-                project.setTaskCount(projectsRS.getInt("task_count"));
                 project.setUserCount(projectsRS.getInt("user_count"));
+                project.setSubProjectCount(projectsRS.getInt("subproject_count"));
 
                 projects.add(project);
             }
@@ -67,4 +76,9 @@ public class ProjectRepository {
     }
 
 
+
 }
+
+
+
+

@@ -6,6 +6,7 @@ public class Project {
     private String status;
     private int taskCount;
     private int userCount;
+    private int subProjectCount;
 
 
     public Project(String projectName, int project_id, String status) {
@@ -59,6 +60,13 @@ public class Project {
 
     public int getUserCount() {
         return userCount;
+    }
+    public int getSubProjectCount() {
+        return subProjectCount;
+    }
+
+    public void setSubProjectCount(int subProjectCount) {
+        this.subProjectCount = subProjectCount;
     }
 
 

@@ -19,7 +19,7 @@ public class ProjectService {
     public void createProject(Project project, int user_id) throws SQLException {
         projectRepository.createProject(project,user_id);
     }
-    public List<Project> showProjects() throws SQLException {
-        return projectRepository.showProjects();
+    public List<Project> findProjectsByUserId(int userId) throws SQLException {
+        return projectRepository.findProjectsByUserId(userId);
     }
 }

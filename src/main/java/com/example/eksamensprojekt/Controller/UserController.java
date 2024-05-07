@@ -79,6 +79,7 @@ public class UserController {
     public String projectManager(HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
         if (user != null && user.getRole().equals("pjManager")) {
+            model.addAttribute("user", user);
             return "projectManager";
         } else {
             return "redirect:/";
