@@ -46,15 +46,11 @@ public class ProjectRepository {
         List<Project> projects = new ArrayList<>();
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
 
-        String SQL = "SELECT p.project_id, " +
-                "       p.projectName, " +
-                "       p.status, " +
-                "       COUNT(DISTINCT sp.subproject_id) AS subproject_count, " +
-                "       COUNT(DISTINCT t.user_id) AS user_count " +
-                "FROM projects p " +
+        String SQL = "SELECT p.project_id, " + "p.projectName, " + "p.status, " +
+                "COUNT(DISTINCT sp.subproject_id) AS subproject_count, " +
+                "COUNT(DISTINCT t.user_id) AS user_count " + "FROM projects p " +
                 "LEFT JOIN subprojects sp ON p.project_id = sp.project_id " +
-                "LEFT JOIN tasks t ON sp.subproject_id = t.subproject_id " +
-                "WHERE p.user_id = ? " +
+                "LEFT JOIN tasks t ON sp.subproject_id = t.subproject_id " + "WHERE p.user_id = ? " +
                 "GROUP BY p.project_id, p.projectName, p.status";
 
         try (PreparedStatement projectsPS = connection.prepareStatement(SQL)) {
@@ -71,7 +67,6 @@ public class ProjectRepository {
                 projects.add(project);
             }
         }
-
         return projects;
     }
 
