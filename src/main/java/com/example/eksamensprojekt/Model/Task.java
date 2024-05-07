@@ -1,68 +1,88 @@
 package com.example.eksamensprojekt.Model;
 
+import java.time.LocalDate;
+
 public class Task {
     private int taskId;
-    private int subProjectId;
     private String taskName;
-    private String description;
+    private int subprojectId;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private int estTime;
     private String status;
     private int userId;
 
     public Task() {
     }
 
-    public Task(int subProjectId, String taskName, String description, String status, int userId) {
-        this.subProjectId = subProjectId;
+    public Task(String taskName, int subprojectId, LocalDate startDate, LocalDate endDate, int estTime, String status, int userId) {
         this.taskName = taskName;
-        this.description = description;
+        this.subprojectId = subprojectId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.estTime = estTime;
         this.status = status;
         this.userId = userId;
     }
 
-    // Getters
     public int getTaskId() {
         return taskId;
     }
 
-    public int getSubProjectId() {
-        return subProjectId;
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
     }
 
     public String getTaskName() {
         return taskName;
     }
 
-    public String getDescription() {
-        return description;
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
+    public int getSubprojectId() {
+        return subprojectId;
+    }
+
+    public void setSubprojectId(int subprojectId) {
+        this.subprojectId = subprojectId;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public int getEstTime() {
+        return estTime;
+    }
+
+    public void setEstTime(int estTime) {
+        this.estTime = estTime;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    // Setters
-    public void setTaskId(int taskId) {
-        this.taskId = taskId;
-    }
-
-    public void setSubProjectId(int subProjectId) {
-        this.subProjectId = subProjectId;
-    }
-
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public int getUserId() {
+        return userId;
     }
 
     public void setUserId(int userId) {

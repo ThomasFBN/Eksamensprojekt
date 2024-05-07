@@ -21,16 +21,15 @@ public class SubProjectRepository {
     private String db_password;
 
     public void createSubProject(SubProject subProject) throws SQLException {
-        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
-        String SQL = "INSERT INTO subprojects (project_id, subprojectName, status) VALUES (?, ?, ?)";
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
-            preparedStatement.setInt(1, subProject.getProjectId());
-            preparedStatement.setString(2, subProject.getSubProjectName());
-            preparedStatement.setString(3, subProject.getStatus());
-
-            preparedStatement.executeUpdate();
+        String SQL = "INSERT INTO subprojects (subprojectName, status, project_id) VALUES (?, ?, ?)";
+        try (Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
+             PreparedStatement statement = connection.prepareStatement(SQL)) {
+            statement.setString(1, subProject.getSubProjectName());
+            statement.setString(2, subProject.getStatus());
+            statement.setInt(3, subProject.getProjectId());
+            statement.executeUpdate();
         }
     }
+
 
 }

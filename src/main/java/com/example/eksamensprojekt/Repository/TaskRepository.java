@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -22,18 +23,19 @@ public class TaskRepository {
 
 
     public void createTask(Task task) throws SQLException {
-        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
-        String SQL = "INSERT INTO tasks (subproject_id, taskName, description, status, user_id) VALUES (?, ?, ?, ?, ?)";
-
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
-            preparedStatement.setInt(1, task.getSubProjectId());
-            preparedStatement.setString(2, task.getTaskName());
-            preparedStatement.setString(3, task.getDescription());
-            preparedStatement.setString(4, task.getStatus());
-            preparedStatement.setInt(5, task.getUserId());
-
-            preparedStatement.executeUpdate();
+        String SQL = "INSERT INTO tasks (taskName, subproject_id, startDate, endDate, estTime, status, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
+             PreparedStatement statement = connection.prepareStatement(SQL)) {
+            statement.setString(1, task.getTaskName());
+            statement.setInt(2, task.getSubprojectId());
+            statement.setDate(3, Date.valueOf(task.getStartDate()));
+            statement.setDate(4, Date.valueOf(task.getEndDate()));
+            statement.setInt(5, task.getEstTime());
+            statement.setString(6, task.getStatus());
+            statement.setInt(7, task.getUserId());
+            statement.executeUpdate();
         }
     }
+
 
 }
