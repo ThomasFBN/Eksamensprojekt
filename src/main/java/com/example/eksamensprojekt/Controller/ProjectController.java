@@ -6,10 +6,13 @@ import com.example.eksamensprojekt.Service.ProjectService;
 import com.example.eksamensprojekt.Service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 public class ProjectController {
@@ -30,6 +33,10 @@ public class ProjectController {
         return "projectManager";
 
     }
-
-
+    @GetMapping("/showProjects")
+    public String showProjects(Model model) throws SQLException {
+        List<Project> projectList = projectService.showProjects();
+        model.addAttribute("projectList", projectList);
+        return "/showProjects";
+    }
 }

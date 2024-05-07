@@ -3,8 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link th:href="@{/projectManager.css}" rel="stylesheet">
 </head>
 <body>
+<div class="background">
+</div>
+<table class="table">
+  <thead>
+   <tr>
+       <th>Project Name</th>
+       <th>Open Task</th>
+       <th>Number of emp</th>
+       <th>Edit/Delete</th>
+       <th>Status</th>
+   </tr>
+  </thead>
+    <tbody>
+    <tr th:each=" : ${}" class="project-row">
+
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>
