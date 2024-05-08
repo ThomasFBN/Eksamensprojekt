@@ -47,6 +47,11 @@ public class ProjectController {
         }
     }
 
+    @GetMapping("/projectDetails/{projectId}")
+    public String projectDetails(Model model, @PathVariable("projectId")int projectId) throws SQLException {
+
+        return "projectDetails";
+    }
 
 }
 
