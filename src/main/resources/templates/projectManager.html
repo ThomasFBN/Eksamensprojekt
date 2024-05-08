@@ -55,6 +55,7 @@
         <h2>View ongoing project</h2>
         </a>
         <form method="post" action="/projectManager">
+            <input type="hidden" name="userId" th:value="${user.getUser_ID()}">
             <label for="name">Name:</label>
             <input type="text" id="Name" name="projectName" placeholder="Name">
             <br>

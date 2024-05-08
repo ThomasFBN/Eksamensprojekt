@@ -11,8 +11,6 @@
     <thead>
     <tr>
         <th>Project Name</th>
-        <th>Number of Subprojects</th>
-        <th>Number of Employees</th>
         <th>Status</th>
         <th>Edit/Delete</th>
     </tr>
@@ -24,9 +22,17 @@
                 <p th:text="${project.projectName}"></p>
             </a>
         </td>
-        <td th:text="${project.subProjectCount}"></td>
-        <td th:text="${project.userCount}"></td>
         <td th:text="${project.status}"></td>
+        <td>
+            <div class="edit-delete-buttons">
+                <a th:href="@{'/editProject/' + ${project.project_id}}">
+                    <button>Edit</button>
+                </a>
+                <a th:href="@{'/deleteProject/' + ${project.project_id}}">
+                    <button>Delete</button>
+                </a>
+            </div>
+        </td>
     </tr>
     </tbody>
 </table>

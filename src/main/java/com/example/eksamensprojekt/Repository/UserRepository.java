@@ -11,7 +11,6 @@ import java.util.List;
 
 @Repository
 public class UserRepository {
-    private User user;
     @Value("${spring.datasource.url}")
     private String db_url;
     @Value("${spring.datasource.username}")

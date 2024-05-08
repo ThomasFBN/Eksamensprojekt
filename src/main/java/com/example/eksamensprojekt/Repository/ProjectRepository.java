@@ -42,7 +42,7 @@ public class ProjectRepository {
         }
     }
 
-    public List<Project> findProjectsByUserId(int userId) throws SQLException {
+    /*public List<Project> findProjectsByUserId(int userId) throws SQLException {
         List<Project> projects = new ArrayList<>();
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
 
@@ -68,7 +68,29 @@ public class ProjectRepository {
             }
         }
         return projects;
+    } */
+
+    public List<Project> findProjectsByUserId(int userId) throws SQLException {
+        List<Project> projects = new ArrayList<>();
+        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
+
+        String SQL = "SELECT project_id, projectName, status FROM projects WHERE user_id = ?";
+
+        try (PreparedStatement projectsPS = connection.prepareStatement(SQL)) {
+            projectsPS.setInt(1, userId);
+            ResultSet projectsRS = projectsPS.executeQuery();
+            while (projectsRS.next()) {
+                Project project = new Project();
+                project.setProject_id(projectsRS.getInt("project_id"));
+                project.setProjectName(projectsRS.getString("projectName"));
+                project.setStatus(projectsRS.getString("status"));
+
+                projects.add(project);
+            }
+        }
+        return projects;
     }
+
 
 
 
