@@ -3,13 +3,11 @@
 <head>
     <script>
         function showEmployee() {
-            document.getElementById("table_emp").style.display = "block";
             document.getElementById("table_subPj").style.display = "none";
         }
 
         function showSubProjects() {
             document.getElementById("table_subPj").style.display = "block";
-            document.getElementById("table_emp").style.display = "none";
         }
 
         /*function showTable(id_1, id_2) {
@@ -66,26 +64,9 @@
 <div class="background">
 </div>
 <div class="center-box" id="buttons_details">
-    <button onclick="showEmployee()" class="bn37 bn3637">See all emp</button>
     <button onclick="showSubProjects()" class="bn37 bn3637">See all subProjects</button>
 </div>
 <div class="center-box" id="table_details">
-<table class="table" id="table_emp">
-    <thead>
-    <tr>
-        <td>Name</td>
-        <td>remove</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="user: ${users}" class="user-row">
-        <td>
-            <a th:href="@{'/showUsers/' + ${user.user_ID}}">
-                <p th:text="${user.username}"></p>
-            </a>
-        </td>
-    </tbody>
-</table>
 <table class="table" id="table_subPj">
     <thead>
     <tr>
