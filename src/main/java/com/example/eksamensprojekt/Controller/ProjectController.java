@@ -1,6 +1,7 @@
 package com.example.eksamensprojekt.Controller;
 
 import com.example.eksamensprojekt.Model.Project;
+import com.example.eksamensprojekt.Model.SubProject;
 import com.example.eksamensprojekt.Model.User;
 import com.example.eksamensprojekt.Service.ProjectService;
 import com.example.eksamensprojekt.Service.UserService;
@@ -44,7 +45,8 @@ public class ProjectController {
 
     @GetMapping("/projectDetails/{projectId}")
     public String projectDetails(Model model, @PathVariable("projectId")int projectId) throws SQLException {
-
+        List<SubProject> subProjects = projectService.findSubProjectsByProjectId(projectId);
+        model.addAttribute("subProjects", subProjects);
         return "projectDetails";
     }
 

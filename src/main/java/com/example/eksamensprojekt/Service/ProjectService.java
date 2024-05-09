@@ -1,6 +1,7 @@
 package com.example.eksamensprojekt.Service;
 
 import com.example.eksamensprojekt.Model.Project;
+import com.example.eksamensprojekt.Model.SubProject;
 import com.example.eksamensprojekt.Repository.ProjectRepository;
 import com.example.eksamensprojekt.Repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,14 @@ public class ProjectService {
     }
 
     public void createProject(Project project, int user_id) throws SQLException {
-        projectRepository.createProject(project,user_id);
+        projectRepository.createProject(project, user_id);
     }
+
     public List<Project> findProjectsByUserId(int userId) throws SQLException {
         return projectRepository.findProjectsByUserId(userId);
+    }
+
+    public List<SubProject> findSubProjectsByProjectId(int project_id) throws SQLException {
+        return projectRepository.findSubProjectsByProjectId(project_id);
     }
 }

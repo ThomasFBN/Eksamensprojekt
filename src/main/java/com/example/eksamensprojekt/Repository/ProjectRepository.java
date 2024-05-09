@@ -1,6 +1,7 @@
 package com.example.eksamensprojekt.Repository;
 
 import com.example.eksamensprojekt.Model.Project;
+import com.example.eksamensprojekt.Model.SubProject;
 import com.example.eksamensprojekt.util.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
@@ -91,8 +92,28 @@ public class ProjectRepository {
         return projects;
     }
 
+    public List<SubProject> findSubProjectsByProjectId(int projectId) throws SQLException {
+        List<SubProject> subProjects = new ArrayList<>();
+        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
+
+        String SQL = "SELECT subProject_id, subprojectName, status FROM subProjects WHERE project_id = ?";
+
+        try (PreparedStatement subProjectsPS = connection.prepareStatement(SQL)) {
+            subProjectsPS.setInt(1, projectId);
+            ResultSet subProjectsRS = subProjectsPS.executeQuery();
+            while (subProjectsRS.next()) {
+                SubProject subProject = new SubProject();
+                subProject.setSubProjectId(subProjectsRS.getInt("subProject_id"));
+                subProject.setSubProjectName(subProjectsRS.getString("subprojectName"));
+                subProject.setStatus(subProjectsRS.getString("status"));
+
+                subProjects.add(subProject);
+            }
+        }
+        return subProjects;
 
 
+    }
 
 }
 
