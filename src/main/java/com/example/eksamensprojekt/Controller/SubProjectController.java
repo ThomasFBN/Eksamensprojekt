@@ -1,6 +1,8 @@
 package com.example.eksamensprojekt.Controller;
 
 import com.example.eksamensprojekt.Model.SubProject;
+import com.example.eksamensprojekt.Model.Task;
+import com.example.eksamensprojekt.Model.User;
 import com.example.eksamensprojekt.Service.SubProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +19,14 @@ public class SubProjectController {
    public SubProjectController(SubProjectService subProjectService){
        this.subProjectService = subProjectService;
    }
+    @GetMapping("/subProjectDetails/{subProjectId}")
+    public String subProjectDetails (@PathVariable int subProjectId, Model model) throws SQLException {
+        List<Task> tasks = subProjectService.findTasksBySubProjectId(subProjectId);
 
+        model.addAttribute("tasks", tasks);
+
+        return "subProjectDetails";
+    }
 
 
 

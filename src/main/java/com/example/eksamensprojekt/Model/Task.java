@@ -11,6 +11,7 @@ public class Task {
     private int estTime;
     private String status;
     private int userId;
+    private String username;
 
     public Task() {
     }
@@ -88,4 +89,13 @@ public class Task {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }
+

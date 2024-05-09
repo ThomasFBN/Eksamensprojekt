@@ -44,20 +44,16 @@ public class ProjectController {
     }
 
     @GetMapping("/projectDetails/{projectId}")
-    public String projectDetails(Model model, @PathVariable("projectId")int projectId) throws SQLException {
+    public String projectDetails(@PathVariable int projectId, Model model) throws SQLException {
         List<SubProject> subProjects = projectService.findSubProjectsByProjectId(projectId);
+        List<User> users = projectService.findUsersByProjectId(projectId);
+
         model.addAttribute("subProjects", subProjects);
+        model.addAttribute("users", users);
+
         return "projectDetails";
     }
-    @GetMapping("/projectDetals/{projectId}")
-    public String getUsersByProjectId(@PathVariable int projectId, Model model) throws SQLException {
-            List<User> users = projectService.findUsersByProjectId(projectId);
-            model.addAttribute("users", users);
-            return "projectDetails";
 
-
-
-    }
 
 }
 

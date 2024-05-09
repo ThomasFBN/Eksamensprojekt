@@ -2,6 +2,7 @@ package com.example.eksamensprojekt.Service;
 
 import com.example.eksamensprojekt.Model.Project;
 import com.example.eksamensprojekt.Model.SubProject;
+import com.example.eksamensprojekt.Model.Task;
 import com.example.eksamensprojekt.Repository.ProjectRepository;
 import com.example.eksamensprojekt.Repository.SubProjectRepository;
 import com.example.eksamensprojekt.Repository.TaskRepository;
@@ -23,5 +24,9 @@ public class SubProjectService {
         subProjectRepository.createSubProject(subProject);
     }
 
+    public List<Task> findTasksBySubProjectId(int subProject_id) throws SQLException {
+        return subProjectRepository.findTasksBySubProjectId(subProject_id);
 
+
+    }
 }
