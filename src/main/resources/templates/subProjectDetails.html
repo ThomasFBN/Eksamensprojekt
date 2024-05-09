@@ -2,21 +2,15 @@
 <html lang="en">
 <head>
     <script>
-        function showEmployee() {
-            document.getElementById("table_emp").style.display = "block";
-            document.getElementById("table_subPj").style.display = "none";
+        function showTasks() {
+            document.getElementById("table_tasks").style.display = "block";
+            document.getElementById("table_users").style.display = "none";
         }
 
-        function showSubProjects() {
-            document.getElementById("table_subPj").style.display = "block";
-            document.getElementById("table_emp").style.display = "none";
+        function showUsers() {
+            document.getElementById("table_users").style.display = "block";
+            document.getElementById("table_tasks").style.display = "none";
         }
-
-        /*function showTable(id_1, id_2) {
-           document.getElementById(id_1).style.display = "block";
-           document.getElementById(id_2).style.display = "none";
-       } */
-
     </script>
     <meta charset="UTF-8">
     <title>ProjectDetails</title>
@@ -52,7 +46,7 @@
                           d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95"/>
                 </svg>
             </a>
-            <a href="/static" th:href="@{/static}" target="_blank" class="sm-icon">
+            <a href="/" th:href="@{/}" target="_blank" class="sm-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
                     <path fill="currentColor"
                           d="M6 19h3v-6h6v6h3v-9l-6-4.5L6 10zm-2 2V9l8-6l8 6v12h-7v-6h-2v6zm8-8.75"/>
@@ -66,50 +60,49 @@
 <div class="background">
 </div>
 <div class="center-box" id="buttons_details">
-    <button onclick="showEmployee()" class="bn37 bn3637">See all emp</button>
-    <button onclick="showSubProjects()" class="bn37 bn3637">See all subProjects</button>
+    <button onclick="showTasks()" class="bn37 bn3637">See all tasks</button>
+    <button onclick="showUsers()" class="bn37 bn3637">See all users</button>
 </div>
 <div class="center-box" id="table_details">
-    <table class="table" id="table_emp">
+    <table class="table" id="table_tasks" style="display: none;">
         <thead>
         <tr>
-            <td>Name</td>
-            <td>remove</td>
+            <td>Task Name</td>
+            <td>Start Date</td>
+            <td>End Date</td>
+            <td>Estimated Time</td>
+            <td>Status</td>
+            <td>Assigned User</td>
+            <td>Delete/Edit Task</td>
+
         </tr>
         </thead>
         <tbody>
-        <tr th:each="user: ${users}" class="user-row">
+        <tr th:each="task: ${tasks}" class="task-row">
             <td>
-                <a th:href="@{'/showUsers/' + ${user.user_ID}}">
-                    <p th:text="${user.username}"></p>
-                </a>
-            </td>
-        </tbody>
-    </table>
-    <table class="table" id="table_subPj">
-        <thead>
-        <tr>
-            <td>SubProject Name</td>
-            <td>Est.time</td>
-            <td>Delete/Edit SubProject</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr  th:each="subProject : ${subProjects}">
-            <td>
-                <a th:href="@{'/projectDetals/' + ${subProject.getSubProjectName()}}">
-                    <p th:text="${subProject.subProjectName}"></p>
-                </a>
+                <p th:text="${task.taskName}"></p>
             </td>
             <td>
-                <a></a>
+                <p th:text="${task.startDate}"></p>
+            </td>
+            <td>
+                <p th:text="${task.endDate}"></p>
+            </td>
+            <td>
+                <p th:text="${task.estTime}"></p>
+            </td>
+            <td>
+                <p th:text="${task.status}"></p>
+            </td>
+            <td>
+                <p th:text="${task.username}"></p>
             </td>
             <td>
                 <div class="edit-delete-buttons">
-                    <a th:href="@{'/deleteProject/' + ${subProject.subProjectId}}">
+                    <a th:href="@{'/deleteProject/' + ${task.taskId}}">
                         <button class="bn37 bn3637">Delete</button>
                     </a>
-                    <a th:href="@{'/editProject/' + ${subProject.subProjectId}}">
+                    <a th:href="@{'/editProject/' + ${task.taskId}}">
                         <button class="bn37 bn3637">Edit</button>
                     </a>
                 </div>
@@ -117,7 +110,20 @@
         </tr>
         </tbody>
     </table>
+    <table class="table" id="table_users" style="display: none;">
+        <thead>
+        <tr>
+            <td>Username</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user: ${users}" class="user-row">
+            <td>
+                <p th:text="${user.username}"></p>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
-
 </body>
 </html>
