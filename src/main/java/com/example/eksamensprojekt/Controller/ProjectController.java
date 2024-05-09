@@ -49,6 +49,15 @@ public class ProjectController {
         model.addAttribute("subProjects", subProjects);
         return "projectDetails";
     }
+    @GetMapping("/projectDetals/{projectId}")
+    public String getUsersByProjectId(@PathVariable int projectId, Model model) throws SQLException {
+            List<User> users = projectService.findUsersByProjectId(projectId);
+            model.addAttribute("users", users);
+            return "projectDetails";
+
+
+
+    }
 
 }
 
