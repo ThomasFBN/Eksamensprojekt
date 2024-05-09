@@ -47,6 +47,20 @@
 <body>
 <div class="background">
 </div>
+<div class="create-box">
+    <form method="post" th:action="@{/createTask}">
+        <h2>Create user</h2>
+        <div class="input-box">
+            <label for="name">Taskname</label>
+            <input type="text" id="name" name="name" placeholder="Taskname" required>
+        </div>
+        <div class="input-box">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+        </div>
+        <input type="submit" value="Create Task" placeholder="Create Task"/>
+    </form>
+</div>
 
 </body>
 </html>
