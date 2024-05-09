@@ -44,7 +44,7 @@ public class User {
     public void setUser_ID(int user_ID) {
         this.user_ID = user_ID;
     }
-    public void setuserList(List<User> userList) {
+    public void setIserList(List<User> userList) {
         userList = userList;
     }
 

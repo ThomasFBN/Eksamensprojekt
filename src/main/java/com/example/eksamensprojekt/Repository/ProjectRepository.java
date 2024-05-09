@@ -2,6 +2,7 @@ package com.example.eksamensprojekt.Repository;
 
 import com.example.eksamensprojekt.Model.Project;
 import com.example.eksamensprojekt.Model.SubProject;
+import com.example.eksamensprojekt.Model.User;
 import com.example.eksamensprojekt.util.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
@@ -115,7 +116,33 @@ public class ProjectRepository {
 
     }
 
+    public List<User> findUsersByProjectId(int projectId) throws SQLException {
+        List<User> users = new ArrayList<>();
+        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
+
+        String SQL = "SELECT u.user_id, u.username " +
+                "FROM users u " +
+                "INNER JOIN projects p ON u.user_id = p.user_id " +
+                "WHERE p.project_id = ?";
+
+        try (PreparedStatement usersPS = connection.prepareStatement(SQL)) {
+            usersPS.setInt(1, projectId);
+            ResultSet usersRS = usersPS.executeQuery();
+            while (usersRS.next()) {
+                User user = new User();
+                user.setUser_ID(usersRS.getInt("user_id"));
+                user.setUsername(usersRS.getString("username"));
+
+                users.add(user);
+            }
+        }
+        return users;
+    }
+
 }
+
+
+
 
 
 
