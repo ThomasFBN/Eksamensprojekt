@@ -55,5 +55,12 @@ public class ProjectController {
     }
 
 
+    @PostMapping("/deleteProject/{id}")
+    public String deleteProject(@PathVariable("id") int id) throws SQLException {
+       List<Project> projectList= projectService.findProjectId(id);
+        projectService.deleteProject(id);
+        return "redirect:/showProjects/";
+    }
+
 }
 

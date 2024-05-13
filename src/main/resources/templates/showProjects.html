@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        function deleteFunction(event) {
+            event.preventDefault();
+            var confirmation = confirm("Are you sure you want to delete?");
+
+            if (confirmation) {
+                window.location.href = event.currentTarget.getAttribute('href');
+            } else {
+                console.log("Deletion canceled.");
+            }
+        }
+    </script>
     <meta charset="UTF-8">
     <title>Title</title>
     <link th:href="@{/projectManager.css}" rel="stylesheet">
@@ -48,35 +60,35 @@
 <body>
 <div class="background"></div>
 <div class="center-box">
-<table class="table">
-    <thead>
-    <tr>
-        <th>Project Name</th>
-        <th>Status</th>
-        <th>Edit/Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="project : ${projectList}" class="project-row">
-        <td>
-            <a th:href="@{'/projectDetails/' + ${project.project_id}}">
-                <p th:text="${project.projectName}"></p>
-            </a>
-        </td>
-        <td th:text="${project.status}"></td>
-        <td>
-            <div class="edit-delete-buttons">
-                <a th:href="@{'/editProject/' + ${project.project_id}}">
-                    <button class="bn37 bn3637">Edit</button>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Project Name</th>
+            <th>Status</th>
+            <th>Edit/Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="project : ${projectList}" class="project-row">
+            <td>
+                <a th:href="@{'/projectDetails/' + ${project.project_id}}">
+                    <p th:text="${project.projectName}"></p>
                 </a>
-                <a th:href="@{'/deleteProject/' + ${project.project_id}}">
-                    <button class="bn37 bn3637"> Delete</button>
-                </a>
-            </div>
-        </td>
-    </tr>
-    </tbody>
-</table>
+            </td>
+            <td th:text="${project.status}"></td>
+            <td>
+                <div class="edit-delete-buttons">
+                    <a th:href="@{'/editProject/' + ${project.project_id}}">
+                        <button class="bn37 bn3637">Edit</button>
+                    </a>
+                    <a th:href="@{'/deleteProject/' + ${project.project_id}}" onclick="deleteFunction(event)">
+                        <button class="bn37 bn3637"> Delete</button>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

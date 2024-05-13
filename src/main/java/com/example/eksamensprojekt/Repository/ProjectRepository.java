@@ -147,6 +147,30 @@ public class ProjectRepository {
         }
     }
 
+    public List<Project> findProjectId(int projectId) throws SQLException {
+        List<Project> projectList = new ArrayList<>();
+        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
+
+        String SQL = "SELECT * FROM projects WHERE project_id=?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
+            preparedStatement.setInt(1, projectId);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Project project = new Project();
+                project.setProject_id(rs.getInt("project_id"));
+                projectList.add(project);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return projectList;
+    }
+
+    public void deleteProject(int project_id) {
+
+    }
+
 }
 
 
