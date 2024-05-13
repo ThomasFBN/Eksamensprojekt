@@ -29,13 +29,13 @@ public class SubProjectController {
     public String createSubProject(@PathVariable("projectId") int projectId, @ModelAttribute SubProject subProject) throws SQLException {
         subProject.setProjectId(projectId);
         subProjectService.createSubProject(subProject);
-        int subProjectId = subProject.getSubProjectId();
-        return "redirect:/projects/" + projectId + "/subProjectDetails/" + subProjectId;
+        return "redirect:/projectDetails/" + projectId;
     }
 
 
 
-    @GetMapping("/subProjectDetals/{subProjectId}")
+
+    @GetMapping("/subProjectDetails/{subProjectId}")
     public String subProjectDetails(@PathVariable int subProjectId, Model model) throws SQLException {
         List<Task> tasks = subProjectService.findTasksBySubProjectId(subProjectId);
         List<User> users = subProjectService.findUsersBySubProjectId(subProjectId);

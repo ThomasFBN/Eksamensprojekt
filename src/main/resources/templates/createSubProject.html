@@ -49,10 +49,10 @@
 <div class="background">
 </div>
 <div class="center-box + create-box">
-    <form method="post" th:action="@{/createSubProject}">
+    <form method="post" th:action="@{'/projectDetails/' + ${projectId} + '/createSubProject'}">
         <h2>Create SubProject</h2>
             <label for="name">Name</label>
-            <input type="text" id="name" name="name" placeholder="Name" required>
+        <input type="text" id="name" name="subProjectName" placeholder="Name" required>
         <input type="submit" value="Create Subproject" placeholder="Create SubProject"/>
     </form>
 </div>
