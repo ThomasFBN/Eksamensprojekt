@@ -1,6 +1,4 @@
 package com.example.eksamensprojekt.Controller;
-
-import com.example.eksamensprojekt.Model.Project;
 import com.example.eksamensprojekt.Model.SubProject;
 import com.example.eksamensprojekt.Model.Task;
 import com.example.eksamensprojekt.Model.User;

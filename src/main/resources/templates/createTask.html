@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Task</title>
+    <link th:href="@{/projectManager.css}" rel="stylesheet">
 </head>
 <header>
     <nav class="container">
@@ -47,18 +48,30 @@
 <body>
 <div class="background">
 </div>
-<div class="create-box">
-    <form method="post" th:action="@{/createTask}">
-        <h2>Create user</h2>
+<div class="center-box create-box">
+    <form method="post" th:action="@{'/subProjectDetails/' + ${subProjectId} + '/createTask'}">
+        <h2>Create Task</h2>
         <div class="input-box">
-            <label for="name">Taskname</label>
-            <input type="text" id="name" name="name" placeholder="Taskname" required>
+            <label for="name">Task Name</label>
+            <input type="text" id="name" name="taskName" placeholder="Task Name" required>
         </div>
         <div class="input-box">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Password" required>
+            <label for="startDate">Start Date</label>
+            <input type="date" id="startDate" name="startDate" required>
         </div>
-        <input type="submit" value="Create Task" placeholder="Create Task"/>
+        <div class="input-box">
+            <label for="endDate">End Date</label>
+            <input type="date" id="endDate" name="endDate" required>
+        </div>
+        <div class="input-box">
+            <label for="estTime">Estimated Time (hours)</label>
+            <input type="number" id="estTime" name="estTime" placeholder="Estimated Time" required>
+        </div>
+        <div class="input-box">
+            <label for="status">Status</label>
+            <input type="text" id="status" name="status" placeholder="Status" required>
+        </div>
+        <input type="submit" value="Create Task"/>
     </form>
 </div>
 

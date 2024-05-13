@@ -78,7 +78,7 @@
     <tbody>
     <tr  th:each="subProject : ${subProjects}">
         <td>
-            <a th:href="@{'/subProjectDetals/' + ${subProject.getSubProjectId()}}">
+            <a th:href="@{'/subProjectDetails/' + ${subProject.getSubProjectId()}}">
                 <p th:text="${subProject.subProjectName}"></p>
             </a>
         </td>

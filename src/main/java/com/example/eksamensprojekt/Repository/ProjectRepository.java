@@ -139,11 +139,12 @@ public class ProjectRepository {
         return users;
     }
 
-    public void editWish(Project project, int wishId) throws SQLException {
+    public void editProject(Project project, int projectId) throws SQLException {
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
         String SQL = "UPDATE Projects SET projectName=?, status=? WHERE project_id";
         try (PreparedStatement ps = connection.prepareStatement(SQL)) {
             ps.executeUpdate();
+
         }
     }
 

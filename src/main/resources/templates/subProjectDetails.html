@@ -107,6 +107,11 @@
                     </a>
                 </div>
             </td>
+            <td>
+                <a th:href="@{'/subProjectDetails/' + ${subProjectId} + '/createTask'}">
+                    <button class="bn37 bn3637">Add</button>
+                </a>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -121,6 +126,8 @@
             <td>
                 <p th:text="${user.username}"></p>
             </td>
+
+
         </tr>
         </tbody>
     </table>

@@ -1,11 +1,13 @@
 package com.example.eksamensprojekt.Model;
 
-import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 public class Task {
     private int taskId;
     private String taskName;
     private int subprojectId;
+    @DateTimeFormat(pattern = "yyyy-MM-DD")
     private LocalDate startDate;
     private LocalDate endDate;
     private int estTime;
@@ -25,7 +27,13 @@ public class Task {
         this.status = status;
         this.userId = userId;
     }
-
+    public Task(String taskName, LocalDate startDate, LocalDate endDate, int estTime, String status) {
+        this.taskName = taskName;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.estTime = estTime;
+        this.status = status;
+    }
     public int getTaskId() {
         return taskId;
     }
