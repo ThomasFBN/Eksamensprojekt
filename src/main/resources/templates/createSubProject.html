@@ -51,8 +51,14 @@
 <div class="center-box + create-box">
     <form method="post" th:action="@{'/projectDetails/' + ${projectId} + '/createSubProject'}">
     <h2>Create SubProject</h2>
+        <div class="input-box">
             <label for="name">Name</label>
         <input type="text" id="name" name="subProjectName" placeholder="Name" required>
+        </div>
+        <div class="input-box">
+            <label for="status">Status</label>
+            <input type="text" id="status" name="status" placeholder="Status" required>
+        </div>
         <input type="submit" value="Create Subproject" placeholder="Create SubProject"/>
     </form>
 </div>
