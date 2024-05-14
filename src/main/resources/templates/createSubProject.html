@@ -57,7 +57,11 @@
         </div>
         <div class="input-box">
             <label for="status">Status</label>
-            <input type="text" id="status" name="status" placeholder="Status" required>
+            <select id="status" name="status" required>
+                <option value="Not Started">Not Started</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+            </select>
         </div>
         <input type="submit" value="Create Subproject" placeholder="Create SubProject"/>
     </form>
