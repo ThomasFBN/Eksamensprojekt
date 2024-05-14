@@ -4,6 +4,7 @@ import com.example.eksamensprojekt.Model.SubProject;
 import com.example.eksamensprojekt.Model.Task;
 import com.example.eksamensprojekt.Model.User;
 import com.example.eksamensprojekt.Service.SubProjectService;
+import com.example.eksamensprojekt.Service.TaskService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +43,29 @@ public class SubProjectController {
         model.addAttribute("users", users);
         return "subProjectDetails";
     }
+
+    @GetMapping("/editSubProject/{subProjectId}")
+    public String getEditSubProjectForm(@PathVariable("subProjectId") int subProjectId, Model model) throws SQLException {
+        SubProject subProject = subProjectService.findSubProjectById(subProjectId);
+        model.addAttribute("subProject", subProject);
+        model.addAttribute("subProjectId", subProjectId);
+        return "editSubProject";
+    }
+
+    @PostMapping("/editSubProject/{subProjectId}")
+    public String editSubProject(@ModelAttribute SubProject subProject, @PathVariable("subProjectId") int subProjectId) throws SQLException {
+        subProjectService.editSubProject(subProject, subProjectId);
+        int projectId = subProjectService.findSubProjectById(subProjectId).getProjectId();
+        return "redirect:/projectDetails/" + projectId;
+    }
+
+
+
+
+
+
+
+
 
 
 }

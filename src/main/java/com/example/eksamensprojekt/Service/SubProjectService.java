@@ -35,11 +35,15 @@ public class SubProjectService {
         return subProjectRepository.findUsersBySubProjectId(subProjectId);
     }
 
-    public void editSubtask(SubProject subProject, int task_id) {
-        subProjectRepository.editSubtask(subProject, task_id);
+    public void editSubProject(SubProject subProject, int task_id) {
+        subProjectRepository.editSubProject(subProject, task_id);
     }
 
-    public void deleteSubtask(int subtask_id) {
-        subProjectRepository.deleteSubtask(subtask_id);
+    public void deleteSubProject(int subProject_id) {
+        subProjectRepository.deleteSubProject(subProject_id);
     }
-}
+    public SubProject findSubProjectById(int subProjectId) throws SQLException {
+        return subProjectRepository.findSubProjectById(subProjectId);
+    }
+
+    }

@@ -69,10 +69,36 @@ public class ProjectController {
 
     @PostMapping("/deleteProject/{id}")
     public String deleteProject(@PathVariable("id") int id) throws SQLException {
-       List<Project> projectList= projectService.findProjectId(id);
+        Project project = projectService.findProjectById(id);
         projectService.deleteProject(id);
         return "redirect:/showProjects/";
     }
+
+    @GetMapping("/editProject/{projectId}")
+    public String getEditProjectForm(@PathVariable("projectId") int projectId, Model model) throws SQLException {
+        Project project = projectService.findProjectById(projectId);
+        model.addAttribute("project", project);
+        model.addAttribute("userId", project.getUser_id());
+        return "editProject";
+    }
+
+
+
+
+
+    @PostMapping("/editProject/{projectId}")
+    public String editProject(@ModelAttribute Project project, @PathVariable("projectId") int projectId, HttpSession session) throws SQLException {
+        int userId = ((User) session.getAttribute("user")).getUser_ID();
+        project.setUser_id(userId);
+        projectService.editProject(project, projectId);
+        return "redirect:/showProjects/" + userId;
+    }
+
+
+
+
+
+
 
 }
 

@@ -142,10 +142,11 @@ public class ProjectRepository {
 
     public void editProject(Project project, int projectId) throws SQLException {
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
-        String SQL = "UPDATE Projects SET projectName=?, status=? WHERE project_id";
+        String SQL = "UPDATE Projects SET projectName=?, status=? WHERE project_id=?";
         try (PreparedStatement pstmt = connection.prepareStatement(SQL)) {
             pstmt.setString(1, project.getProjectName());
-            pstmt.setInt(2, projectId);
+            pstmt.setString(2, project.getStatus());
+            pstmt.setInt(3, projectId);
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -153,8 +154,8 @@ public class ProjectRepository {
         }
     }
 
-    public List<Project> findProjectId(int projectId) throws SQLException {
-        List<Project> projectList = new ArrayList<>();
+    public Project findProjectById(int projectId) throws SQLException {
+        Project project = null;
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
 
         String SQL = "SELECT * FROM projects WHERE project_id=?";
@@ -162,16 +163,15 @@ public class ProjectRepository {
         try (PreparedStatement ps = connection.prepareStatement(SQL)) {
             ps.setInt(1, projectId);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Project project = new Project();
+            if (rs.next()) {
+                project = new Project();
                 project.setProject_id(rs.getInt("project_id"));
-                projectList.add(project);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return projectList;
+        return project;
     }
+
+    }
+
 
     public void deleteProject(int project_id) {
         try {

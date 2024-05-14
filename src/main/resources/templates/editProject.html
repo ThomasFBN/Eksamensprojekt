@@ -11,31 +11,23 @@
 <h1 align="center">Edit Project</h1>
 
 <div>
-    <form method="post"
-          th:action="@{/projects/{user_id}/edit/{project_id}(user_id=${user_id}, project_id=${project_id})}">
+    <form method="post" th:action="@{/editProject/{projectId}(projectId=${project.project_id})}">
 
-        <label for="project_name">Project name:</label>
-        <input id="project_name" type="text" th:name="project_name" th:value="${project.project_name}">
+        <label for="projectName">Project name:</label>
+        <input id="projectName" type="text" name="projectName" th:value="${project.projectName}">
 
-        <label for="project_description">Project description:</label>
-        <input id="project_description" type="text" th:name="project_description"
-               th:value="${project.project_description}">
-
-        <label for="task_start_date">Start Date</label>
-        <input id="task_start_date" type="date" th:field="${project.start_date}" min="2000-01-01" max="3000-12-31">
-
-        <label for="task_end_date">Start Date</label>
-        <input id="task_end_date" type="date" th:field="${project.end_date}" min="2000-01-01" max="3000-12-31">
+        <label for="Status">Status:</label>
+        <input id="Status" type="text" name="status" th:value="${project.status}">
 
         <button class="btn" type="submit">Save</button>
 
-        <a th:href="@{/projects/{user_id}(user_id=${user_id})}">
+        <a th:href="@{/showProjects/{user_id}(user_id=${userId})}">
             <button type="button" class="btn">Return to projects</button>
         </a>
 
     </form>
 
-
 </div>
+
 </body>
 </html>

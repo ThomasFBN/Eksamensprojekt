@@ -43,7 +43,7 @@ public class TaskRepository {
 
     public void deleteTask(int task_id) {
         try {
-            Connection con = ConnectionManager.getConnection(db_url,db_username,db_password);
+            Connection con = ConnectionManager.getConnection(db_url, db_username, db_password);
             String SQL = "DELETE FROM subtask WHERE task_id = ?";
             String SQL1 = "DELETE FROM task WHERE task_id = ?";
             PreparedStatement pstmt = con.prepareStatement(SQL);
@@ -57,16 +57,17 @@ public class TaskRepository {
         }
     }
 
-    public void editTask(Task task, int task_id, int project_id) {
+    public void editTask(Task task, int taskId) {
         try {
-            Connection con = ConnectionManager.getConnection(db_url,db_username,db_password);
-            String SQL = "UPDATE task SET TaskName = ?, start_date = ?, end_date = ?, EstTime = ?, status =?, WHERE task_id = ?";
+            Connection con = ConnectionManager.getConnection(db_url, db_username, db_password);
+            String SQL = "UPDATE tasks SET TaskName = ?, startDate = ?, endDate = ?, EstTime = ?, status = ? WHERE task_id = ?";
             try (PreparedStatement pstmt = con.prepareStatement(SQL)) {
                 pstmt.setString(1, task.getTaskName());
                 pstmt.setDate(2, java.sql.Date.valueOf(task.getStartDate()));
                 pstmt.setDate(3, java.sql.Date.valueOf(task.getEndDate()));
                 pstmt.setInt(4, task.getEstTime());
                 pstmt.setString(5, task.getStatus());
+                pstmt.setInt(6, taskId);
 
                 pstmt.executeUpdate();
             } catch (SQLException e) {
@@ -78,5 +79,30 @@ public class TaskRepository {
     }
 
 
+    public Task findTaskByTaskId(int taskId) throws SQLException {
+        Task task = null;
+        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
 
+        String SQL = "SELECT * FROM tasks WHERE task_id = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(SQL)) {
+            ps.setInt(1, taskId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                task = new Task();
+                task.setTaskId(rs.getInt("task_id"));
+                task.setTaskName(rs.getString("taskName"));
+                task.setSubprojectId(rs.getInt("subproject_id"));
+                task.setStartDate(rs.getDate("startDate").toLocalDate());
+                task.setEndDate(rs.getDate("endDate").toLocalDate());
+                task.setEstTime(rs.getInt("estTime"));
+                task.setStatus(rs.getString("status"));
+
+            }
+            return task;
+
+        }
+
+
+    }
 }

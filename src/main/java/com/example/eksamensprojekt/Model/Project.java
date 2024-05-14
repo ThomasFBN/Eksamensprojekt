@@ -4,10 +4,9 @@ public class Project {
     private String projectName;
     private int project_id;
     private String status;
-    private int taskCount;
-    private int userCount;
-    private int subProjectCount;
 
+
+    private int user_id;
 
     public Project(String projectName, int project_id, String status) {
         this.projectName = projectName;
@@ -47,30 +46,12 @@ public class Project {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    public void setTaskCount(int taskCount) {
-        this.taskCount = taskCount;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setUserCount(int userCount) {
-        this.userCount = userCount;
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
-
-    public int getTaskCount() {
-        return taskCount;
-    }
-
-    public int getUserCount() {
-        return userCount;
-    }
-
-    public int getSubProjectCount() {
-        return subProjectCount;
-    }
-
-    public void setSubProjectCount(int subProjectCount) {
-        this.subProjectCount = subProjectCount;
-    }
-
 
 }

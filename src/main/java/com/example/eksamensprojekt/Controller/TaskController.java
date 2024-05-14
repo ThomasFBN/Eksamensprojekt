@@ -34,18 +34,25 @@ public class TaskController {
         return "redirect:/subProjectDetails/" + subProjectId;
     }
 
-    @GetMapping("/editTask/{id}")
-    public String getEditTaskForm(@PathVariable("id") int id, Model model) throws SQLException {
-        Task task = taskService.findTaskById(id);
-        model.addAttribute("wish", wish);
-        return "editWish";
+    @GetMapping("/editTask/{taskId}")
+    public String getEditTaskForm(@PathVariable("taskId") int taskId, Model model) throws SQLException {
+        Task task = taskService.findTaskByTaskId(taskId);
+        model.addAttribute("task", task);
+        model.addAttribute("taskId", taskId);
+
+        return "editTask";
+    }
+
+    @PostMapping("/editTask/{taskId}")
+    public String editTask(@ModelAttribute Task task, @PathVariable("taskId") int taskId) throws SQLException {
+        taskService.editTask(task, taskId);
+        int subprojectId = taskService.findTaskByTaskId(taskId).getSubprojectId();
+
+        return "redirect:/subProjectDetails/" + subprojectId;
     }
 
 
-    @PostMapping("/editTask/{id}")
-    public String editTask(@ModelAttribute Task task, @PathVariable("id") int id) throws SQLException {
-        TaskService.editTask(wish, id);
-        int wishlistId = taskService.findTaskIdByTaskId(id);
-        return "redirect:/showWish/" + wishlistId;
-    }
+
+
+
 }

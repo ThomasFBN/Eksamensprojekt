@@ -91,7 +91,7 @@ public class SubProjectRepository {
         return users;
     }
 
-    public void deleteSubtask(int subtask_id) {
+    public void deleteSubProject(int subtask_id) {
         try {
             Connection con = ConnectionManager.getConnection(db_url,db_username,db_password);
             String SQL = "DELETE FROM subtask WHERE subProject_id = ?";
@@ -103,13 +103,14 @@ public class SubProjectRepository {
         }
     }
 
-    public void editSubtask(SubProject subProject, int task_id) {
+    public void editSubProject(SubProject subProject, int subProjectId) {
         try {
-            Connection con = ConnectionManager.getConnection(db_url,db_username,db_password);
-            String SQL = "UPDATE subtask SET subProjectName = ?, status = ? WHERE subProject_id = ?";
+            Connection con = ConnectionManager.getConnection(db_url, db_username, db_password);
+            String SQL = "UPDATE subprojects SET subprojectName = ?, status = ? WHERE subProject_id = ?";
             try (PreparedStatement pstmt = con.prepareStatement(SQL)) {
                 pstmt.setString(1, subProject.getSubProjectName());
                 pstmt.setString(2, subProject.getStatus());
+                pstmt.setInt(3, subProjectId);
 
                 pstmt.executeUpdate();
             } catch (SQLException e) {
@@ -119,4 +120,25 @@ public class SubProjectRepository {
             throw new RuntimeException(e);
         }
     }
+
+    public SubProject findSubProjectById(int subProjectId) throws SQLException {
+        SubProject subProject = null;
+        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
+
+        String SQL = "SELECT * FROM subprojects WHERE subProject_id = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(SQL)) {
+            ps.setInt(1, subProjectId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                subProject = new SubProject();
+                subProject.setSubProjectId(rs.getInt("subProject_id"));
+                subProject.setSubProjectName(rs.getString("subprojectName"));
+                subProject.setStatus(rs.getString("status"));
+                subProject.setProjectId(rs.getInt("project_id"));
+            }
+        }
+        return subProject;
+    }
+
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit SubProject</title>
+    <link th:href="@{/edit.css}" rel="stylesheet">
+</head>
+
+<body>
+
+<h1 align="center">Edit SubProject</h1>
+
+<div>
+    <form method="post" th:action="@{/editSubProject/{subProjectId}(subProjectId=${subProjectId})}">
+        <label for="subProject_name">SubProject name:</label>
+        <input id="subProject_name" type="text" name="subProjectName" th:value="${subProject.subProjectName}">
+
+        <label for="Status">Status:</label>
+        <input id="Status" type="text" name="status" th:value="${subProject.status}">
+
+        <button class="btn" type="submit">Save</button>
+
+        <a th:href="@{/projects/{user_id}(user_id=${userId})}">
+            <button type="button" class="btn">Return to projects</button>
+        </a>
+    </form>
+</div>
+
+</body>
+</html>

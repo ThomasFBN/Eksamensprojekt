@@ -18,12 +18,16 @@ public class TaskService {
         taskRepository.createTask(task);
     }
 
-    public void editTask (Task task, int task_id, int project_id) {
-        taskRepository.editTask(task, task_id, project_id);
+    public void editTask(Task task, int task_id) {
+        taskRepository.editTask(task, task_id);
     }
 
     public void deleteTask(int task_id) {
         taskRepository.deleteTask(task_id);
     }
 
+    public Task findTaskByTaskId(int taskId) throws SQLException {
+        return taskRepository.findTaskByTaskId(taskId);
+
+    }
 }

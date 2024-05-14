@@ -35,8 +35,8 @@ public class ProjectService {
 
     }
 
-    public List<Project> findProjectId(int id) throws SQLException {
-        return projectRepository.findProjectId(id);
+    public Project findProjectById(int id) throws SQLException {
+        return projectRepository.findProjectById(id);
     }
 
     public void deleteProject(int project_id) {

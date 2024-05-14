@@ -85,10 +85,10 @@
             <td th:text="${subProject.status}"></td>
             <td>
                 <div class="edit-delete-buttons">
-                    <a th:href="@{'/deleteProject/' + ${subProject.subProjectId}}">
+                    <a th:href="@{'/deleteSubProject/' + ${subProject.subProjectId}}">
                         <button class="bn37 bn3637">Delete</button>
                     </a>
-                    <a th:href="@{'/editProject/' + ${subProject.subProjectId}}">
+                    <a th:href="@{'/editSubProject/' + ${subProject.subProjectId}}">
                         <button class="bn37 bn3637">Edit</button>
                     </a>
                 </div>
