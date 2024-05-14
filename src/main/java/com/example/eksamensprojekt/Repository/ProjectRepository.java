@@ -34,9 +34,9 @@ public class ProjectRepository {
 
 
                 int rowsAffected = ps.executeUpdate();
-                ResultSet resultSet = ps.getGeneratedKeys();
-                if (resultSet.next()) {
-                    long generatedId = resultSet.getLong(1);
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    long generatedId = rs.getLong(1);
                     project.setProject_id((int) generatedId);
                 }
 
@@ -78,14 +78,14 @@ public class ProjectRepository {
 
         String SQL = "SELECT project_id, projectName, status FROM projects WHERE user_id = ?";
 
-        try (PreparedStatement projectsPS = connection.prepareStatement(SQL)) {
-            projectsPS.setInt(1, userId);
-            ResultSet projectsRS = projectsPS.executeQuery();
-            while (projectsRS.next()) {
+        try (PreparedStatement ps = connection.prepareStatement(SQL)) {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
                 Project project = new Project();
-                project.setProject_id(projectsRS.getInt("project_id"));
-                project.setProjectName(projectsRS.getString("projectName"));
-                project.setStatus(projectsRS.getString("status"));
+                project.setProject_id(rs.getInt("project_id"));
+                project.setProjectName(rs.getString("projectName"));
+                project.setStatus(rs.getString("status"));
 
                 projects.add(project);
             }
@@ -99,14 +99,14 @@ public class ProjectRepository {
 
         String SQL = "SELECT subProject_id, subprojectName, status FROM subProjects WHERE project_id = ?";
 
-        try (PreparedStatement subProjectsPS = connection.prepareStatement(SQL)) {
-            subProjectsPS.setInt(1, projectId);
-            ResultSet subProjectsRS = subProjectsPS.executeQuery();
-            while (subProjectsRS.next()) {
+        try (PreparedStatement ps = connection.prepareStatement(SQL)) {
+            ps.setInt(1, projectId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
                 SubProject subProject = new SubProject();
-                subProject.setSubProjectId(subProjectsRS.getInt("subProject_id"));
-                subProject.setSubProjectName(subProjectsRS.getString("subprojectName"));
-                subProject.setStatus(subProjectsRS.getString("status"));
+                subProject.setSubProjectId(rs.getInt("subProject_id"));
+                subProject.setSubProjectName(rs.getString("subprojectName"));
+                subProject.setStatus(rs.getString("status"));
 
                 subProjects.add(subProject);
             }
@@ -125,13 +125,13 @@ public class ProjectRepository {
                 "INNER JOIN projects p ON u.user_id = p.user_id " +
                 "WHERE p.project_id = ?";
 
-        try (PreparedStatement usersPS = connection.prepareStatement(SQL)) {
-            usersPS.setInt(1, projectId);
-            ResultSet usersRS = usersPS.executeQuery();
-            while (usersRS.next()) {
+        try (PreparedStatement ps = connection.prepareStatement(SQL)) {
+            ps.setInt(1, projectId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
                 User user = new User();
-                user.setUser_ID(usersRS.getInt("user_id"));
-                user.setUsername(usersRS.getString("username"));
+                user.setUser_ID(rs.getInt("user_id"));
+                user.setUsername(rs.getString("username"));
 
                 users.add(user);
             }
@@ -154,9 +154,9 @@ public class ProjectRepository {
 
         String SQL = "SELECT * FROM projects WHERE project_id=?";
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(SQL)) {
-            preparedStatement.setInt(1, projectId);
-            ResultSet rs = preparedStatement.executeQuery();
+        try (PreparedStatement ps = connection.prepareStatement(SQL)) {
+            ps.setInt(1, projectId);
+            ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Project project = new Project();
                 project.setProject_id(rs.getInt("project_id"));

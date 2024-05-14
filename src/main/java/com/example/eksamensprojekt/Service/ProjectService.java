@@ -38,7 +38,8 @@ public class ProjectService {
     public List<Project> findProjectId(int id) throws SQLException {
         return projectRepository.findProjectId(id);
     }
+
     public void deleteProject(int project_id) {
-         projectRepository.deleteProject(project_id);
+        projectRepository.deleteProject(project_id);
     }
 }

@@ -13,8 +13,10 @@ public class TaskService {
     public TaskService(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
+
     public void createTask(Task task) throws SQLException {
         taskRepository.createTask(task);
     }
+
 
 }

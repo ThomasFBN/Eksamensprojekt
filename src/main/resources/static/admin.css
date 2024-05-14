@@ -211,6 +211,7 @@ h3 {
     background-color: #1ABAEF;
     transform: perspective(1px) scale3d(1.044, 1.044, 1) translateZ(0) !important;
 }
+
 .showAll-table th {
     padding: 25px;
     border-collapse: collapse;

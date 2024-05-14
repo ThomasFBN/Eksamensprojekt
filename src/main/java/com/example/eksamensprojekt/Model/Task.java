@@ -3,6 +3,7 @@ package com.example.eksamensprojekt.Model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+
 public class Task {
     private int taskId;
     private String taskName;
@@ -27,6 +28,7 @@ public class Task {
         this.status = status;
         this.userId = userId;
     }
+
     public Task(String taskName, LocalDate startDate, LocalDate endDate, int estTime, String status) {
         this.taskName = taskName;
         this.startDate = startDate;
@@ -34,6 +36,7 @@ public class Task {
         this.estTime = estTime;
         this.status = status;
     }
+
     public int getTaskId() {
         return taskId;
     }

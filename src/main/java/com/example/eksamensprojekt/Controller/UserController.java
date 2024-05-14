@@ -99,12 +99,13 @@ public class UserController {
         userService.createUser(user);
         return "redirect:/admin";
     }
-   @GetMapping("/showUsers")
-   public String showUsers(Model model) throws SQLException {
-       List<User> userList = userService.showAllUsers();
-       model.addAttribute("userList", userList);
-       return "showUsers";
-   }
+
+    @GetMapping("/showUsers")
+    public String showUsers(Model model) throws SQLException {
+        List<User> userList = userService.showAllUsers();
+        model.addAttribute("userList", userList);
+        return "showUsers";
+    }
 }
 
 

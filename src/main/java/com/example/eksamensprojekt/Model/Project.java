@@ -47,6 +47,7 @@ public class Project {
     public void setStatus(String status) {
         this.status = status;
     }
+
     public void setTaskCount(int taskCount) {
         this.taskCount = taskCount;
     }
@@ -54,6 +55,7 @@ public class Project {
     public void setUserCount(int userCount) {
         this.userCount = userCount;
     }
+
     public int getTaskCount() {
         return taskCount;
     }
@@ -61,6 +63,7 @@ public class Project {
     public int getUserCount() {
         return userCount;
     }
+
     public int getSubProjectCount() {
         return subProjectCount;
     }

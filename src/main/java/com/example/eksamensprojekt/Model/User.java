@@ -9,7 +9,7 @@ public class User {
     private int user_ID;
     private List<User> userList;
 
-    public User(){
+    public User() {
 
     }
 
@@ -44,6 +44,7 @@ public class User {
     public void setUser_ID(int user_ID) {
         this.user_ID = user_ID;
     }
+
     public void setUserList(List<User> userList) {
         userList = userList;
     }

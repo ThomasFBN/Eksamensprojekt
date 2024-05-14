@@ -1,4 +1,5 @@
 package com.example.eksamensprojekt.Controller;
+
 import com.example.eksamensprojekt.Model.SubProject;
 import com.example.eksamensprojekt.Model.Task;
 import com.example.eksamensprojekt.Model.User;
@@ -14,23 +15,23 @@ import java.util.List;
 public class SubProjectController {
     private SubProjectService subProjectService;
 
-   public SubProjectController(SubProjectService subProjectService){
-       this.subProjectService = subProjectService;
-   }
+    public SubProjectController(SubProjectService subProjectService) {
+        this.subProjectService = subProjectService;
+    }
+
     @GetMapping("/projectDetails/{projectId}/createSubProject")
     public String showCreateSubProjectForm(@PathVariable("projectId") int projectId, Model model) {
         model.addAttribute("projectId", projectId);
         model.addAttribute("subProject", new SubProject());
         return "createSubProject";
     }
+
     @PostMapping("/projectDetails/{projectId}/createSubProject")
     public String createSubProject(@PathVariable("projectId") int projectId, @ModelAttribute SubProject subProject) throws SQLException {
         subProject.setProjectId(projectId);
         subProjectService.createSubProject(subProject);
         return "redirect:/projectDetails/" + projectId;
     }
-
-
 
 
     @GetMapping("/subProjectDetails/{subProjectId}")
@@ -41,9 +42,6 @@ public class SubProjectController {
         model.addAttribute("users", users);
         return "subProjectDetails";
     }
-
-
-
 
 
 }

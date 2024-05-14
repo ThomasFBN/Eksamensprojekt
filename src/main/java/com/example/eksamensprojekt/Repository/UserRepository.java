@@ -57,9 +57,9 @@ public class UserRepository {
                 ps.setString(3, user.getRole());
 
                 int rowsAffected = ps.executeUpdate();
-                ResultSet resultSet = ps.getGeneratedKeys();
-                if (resultSet.next()) {
-                    long generatedId = resultSet.getLong(1);
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    long generatedId = rs.getLong(1);
                     user.setUser_ID((int) generatedId);
                 }
             }
@@ -84,7 +84,6 @@ public class UserRepository {
         }
         return userList;
     }
-
 
 
 }

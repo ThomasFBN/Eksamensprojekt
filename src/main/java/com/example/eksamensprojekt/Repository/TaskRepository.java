@@ -22,7 +22,7 @@ public class TaskRepository {
     public void createTask(Task task) throws SQLException {
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
 
-        String SQL = "INSERT INTO tasks (taskName, subproject_id, startDate, endDate, estTime, status, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String SQL = "INSERT INTO tasks (taskName, subproject_id, startDate, endDate, estTime, status) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement ps = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, task.getTaskName());
@@ -31,19 +31,15 @@ public class TaskRepository {
             ps.setDate(4, java.sql.Date.valueOf(task.getEndDate()));
             ps.setInt(5, task.getEstTime());
             ps.setString(6, task.getStatus());
-            ps.setInt(7, task.getUserId());
 
             int rowsAffected = ps.executeUpdate();
-            ResultSet resultSet = ps.getGeneratedKeys();
-            if (resultSet.next()) {
-                long generatedId = resultSet.getLong(1);
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                long generatedId = rs.getLong(1);
                 task.setTaskId((int) generatedId);
             }
         }
     }
-
-
-
 
 
 }

@@ -67,44 +67,44 @@
     <button onclick="showSubProjects()" class="bn37 bn3637">See all subProjects</button>
 </div>
 <div class="center-box" id="table_details">
-<table class="table" id="table_subPj">
-    <thead>
-    <tr>
-        <td>SubProject Name</td>
-        <td>Est.time</td>
-        <td>Delete/Edit SubProject</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr  th:each="subProject : ${subProjects}">
-        <td>
-            <a th:href="@{'/subProjectDetails/' + ${subProject.getSubProjectId()}}">
-                <p th:text="${subProject.subProjectName}"></p>
-            </a>
-        </td>
-        <td>
-            <a></a>
-        </td>
-        <td>
-            <div class="edit-delete-buttons">
-                <a th:href="@{'/deleteProject/' + ${subProject.subProjectId}}">
-                    <button class="bn37 bn3637">Delete</button>
+    <table class="table" id="table_subPj">
+        <thead>
+        <tr>
+            <td>SubProject Name</td>
+            <td>Est.time</td>
+            <td>Delete/Edit SubProject</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="subProject : ${subProjects}">
+            <td>
+                <a th:href="@{'/subProjectDetails/' + ${subProject.getSubProjectId()}}">
+                    <p th:text="${subProject.subProjectName}"></p>
                 </a>
-                <a th:href="@{'/editProject/' + ${subProject.subProjectId}}">
-                    <button class="bn37 bn3637">Edit</button>
+            </td>
+            <td>
+                <a></a>
+            </td>
+            <td>
+                <div class="edit-delete-buttons">
+                    <a th:href="@{'/deleteProject/' + ${subProject.subProjectId}}">
+                        <button class="bn37 bn3637">Delete</button>
+                    </a>
+                    <a th:href="@{'/editProject/' + ${subProject.subProjectId}}">
+                        <button class="bn37 bn3637">Edit</button>
+                    </a>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a th:href="@{'/projectDetails/' + ${projectId} + '/createSubProject'}">
+                    <button class="bn37 bn3637">Add</button>
                 </a>
-            </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a th:href="@{'/projectDetails/' + ${projectId} + '/createSubProject'}">
-            <button class="bn37 bn3637">Add</button>
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 </body>

@@ -33,9 +33,9 @@ public class SubProjectRepository {
             ps.setInt(3, subProject.getProjectId());
 
             int rowsAffected = ps.executeUpdate();
-            ResultSet resultSet = ps.getGeneratedKeys();
-            if (resultSet.next()) {
-                long generatedId = resultSet.getLong(1);
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                long generatedId = rs.getLong(1);
                 subProject.setSubProjectId((int) generatedId);
             }
         }
@@ -45,24 +45,24 @@ public class SubProjectRepository {
         List<Task> tasks = new ArrayList<>();
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
 
-        String SQL = "SELECT t.*, u.username " +
-                "FROM tasks t " +
-                "INNER JOIN users u ON t.user_id = u.user_id " +
-                "WHERE t.subproject_id = ?";
+        String SQL = "SELECT t.*, u.username\n" +
+                "FROM tasks t\n" +
+                "LEFT JOIN users u ON t.user_id = u.user_id\n" +
+                "WHERE t.subproject_id = ?\n";
 
-        try (PreparedStatement tasksPS = connection.prepareStatement(SQL)) {
-            tasksPS.setInt(1, subProjectId);
-            ResultSet tasksRS = tasksPS.executeQuery();
-            while (tasksRS.next()) {
+        try (PreparedStatement ps = connection.prepareStatement(SQL)) {
+            ps.setInt(1, subProjectId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
                 Task task = new Task();
-                task.setTaskId(tasksRS.getInt("task_id"));
-                task.setTaskName(tasksRS.getString("taskName"));
-                task.setStartDate(tasksRS.getDate("startDate").toLocalDate());
-                task.setEndDate(tasksRS.getDate("endDate").toLocalDate());
-                task.setEstTime(tasksRS.getInt("estTime"));
-                task.setStatus(tasksRS.getString("status"));
-                task.setUserId(tasksRS.getInt("user_id"));
-                task.setUsername(tasksRS.getString("username"));
+                task.setTaskId(rs.getInt("task_id"));
+                task.setTaskName(rs.getString("taskName"));
+                task.setStartDate(rs.getDate("startDate").toLocalDate());
+                task.setEndDate(rs.getDate("endDate").toLocalDate());
+                task.setEstTime(rs.getInt("estTime"));
+                task.setStatus(rs.getString("status"));
+                task.setUserId(rs.getInt("user_id"));
+                task.setUsername(rs.getString("username"));
 
                 tasks.add(task);
             }
@@ -78,19 +78,18 @@ public class SubProjectRepository {
                 "INNER JOIN tasks t ON u.user_id = t.user_id " +
                 "WHERE t.subproject_id = ?";
 
-        try (PreparedStatement usersPS = connection.prepareStatement(SQL)) {
-            usersPS.setInt(1, subProjectId);
-            ResultSet usersRS = usersPS.executeQuery();
-            while (usersRS.next()) {
+        try (PreparedStatement ps = connection.prepareStatement(SQL)) {
+            ps.setInt(1, subProjectId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
                 User user = new User();
-                user.setUser_ID(usersRS.getInt("user_id"));
-                user.setUsername(usersRS.getString("username"));
+                user.setUser_ID(rs.getInt("user_id"));
+                user.setUsername(rs.getString("username"));
                 users.add(user);
             }
         }
         return users;
     }
-
 
 
 }

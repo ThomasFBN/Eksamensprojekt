@@ -14,9 +14,11 @@ import java.sql.SQLException;
 @Controller
 public class TaskController {
     private TaskService taskService;
-    public TaskController(TaskService taskService){
+
+    public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
+
     @GetMapping("/subProjectDetails/{subProjectId}/createTask")
     public String showCreateTaskForm(@PathVariable("subProjectId") int subProjectId, Model model) {
         model.addAttribute("subProjectId", subProjectId);
