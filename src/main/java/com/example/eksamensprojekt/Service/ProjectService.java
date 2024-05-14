@@ -42,4 +42,8 @@ public class ProjectService {
     public void deleteProject(int project_id) {
         projectRepository.deleteProject(project_id);
     }
+    public void editProject(Project project, int projectId) throws SQLException {
+        projectRepository.editProject(project, projectId);
+    }
+
 }

@@ -34,4 +34,12 @@ public class SubProjectService {
     public List<User> findUsersBySubProjectId(int subProjectId) throws SQLException {
         return subProjectRepository.findUsersBySubProjectId(subProjectId);
     }
+
+    public void editSubtask(SubProject subProject, int task_id) {
+        subProjectRepository.editSubtask(subProject, task_id);
+    }
+
+    public void deleteSubtask(int subtask_id) {
+        subProjectRepository.deleteSubtask(subtask_id);
+    }
 }

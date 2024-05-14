@@ -91,5 +91,32 @@ public class SubProjectRepository {
         return users;
     }
 
+    public void deleteSubtask(int subtask_id) {
+        try {
+            Connection con = ConnectionManager.getConnection(db_url,db_username,db_password);
+            String SQL = "DELETE FROM subtask WHERE subProject_id = ?";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            pstmt.setInt(1, subtask_id);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    public void editSubtask(SubProject subProject, int task_id) {
+        try {
+            Connection con = ConnectionManager.getConnection(db_url,db_username,db_password);
+            String SQL = "UPDATE subtask SET subProjectName = ?, status = ? WHERE subProject_id = ?";
+            try (PreparedStatement pstmt = con.prepareStatement(SQL)) {
+                pstmt.setString(1, subProject.getSubProjectName());
+                pstmt.setString(2, subProject.getStatus());
+
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

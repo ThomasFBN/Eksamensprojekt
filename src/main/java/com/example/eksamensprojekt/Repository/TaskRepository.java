@@ -41,5 +41,42 @@ public class TaskRepository {
         }
     }
 
+    public void deleteTask(int task_id) {
+        try {
+            Connection con = ConnectionManager.getConnection(db_url,db_username,db_password);
+            String SQL = "DELETE FROM subtask WHERE task_id = ?";
+            String SQL1 = "DELETE FROM task WHERE task_id = ?";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            PreparedStatement pstmt1 = con.prepareStatement(SQL1);
+            pstmt.setInt(1, task_id);
+            pstmt.executeUpdate();
+            pstmt1.setInt(1, task_id);
+            pstmt1.executeUpdate();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void editTask(Task task, int task_id, int project_id) {
+        try {
+            Connection con = ConnectionManager.getConnection(db_url,db_username,db_password);
+            String SQL = "UPDATE task SET TaskName = ?, start_date = ?, end_date = ?, EstTime = ?, status =?, WHERE task_id = ?";
+            try (PreparedStatement pstmt = con.prepareStatement(SQL)) {
+                pstmt.setString(1, task.getTaskName());
+                pstmt.setDate(2, java.sql.Date.valueOf(task.getStartDate()));
+                pstmt.setDate(3, java.sql.Date.valueOf(task.getEndDate()));
+                pstmt.setInt(4, task.getEstTime());
+                pstmt.setString(5, task.getStatus());
+
+                pstmt.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
 }

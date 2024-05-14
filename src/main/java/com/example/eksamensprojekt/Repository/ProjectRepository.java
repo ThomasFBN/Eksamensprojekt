@@ -142,9 +142,13 @@ public class ProjectRepository {
     public void editProject(Project project, int projectId) throws SQLException {
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
         String SQL = "UPDATE Projects SET projectName=?, status=? WHERE project_id";
-        try (PreparedStatement ps = connection.prepareStatement(SQL)) {
-            ps.executeUpdate();
+        try (PreparedStatement pstmt = connection.prepareStatement(SQL)) {
+            pstmt.setString(1, project.getProjectName());
+            pstmt.setInt(2, projectId);
 
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -169,8 +173,23 @@ public class ProjectRepository {
     }
 
     public void deleteProject(int project_id) {
+        try {
+            Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
+            connection.setAutoCommit(false);
 
+            String SQL1 = "DELETE FROM project WHERE project_id = ?";
+            PreparedStatement deleteProjectStatement = connection.prepareStatement(SQL1);
+            deleteProjectStatement.setInt(1, project_id);
+            deleteProjectStatement.executeUpdate();
+
+            connection.commit();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
+
+
+
 
 }
 
