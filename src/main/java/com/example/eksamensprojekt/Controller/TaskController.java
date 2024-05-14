@@ -27,7 +27,7 @@ public class TaskController {
     }
 
     @PostMapping("/subProjectDetails/{subProjectId}/createTask")
-    public String createSubProject(@PathVariable("subProjectId") int subProjectId, @ModelAttribute Task task) throws SQLException {
+    public String createTask(@PathVariable("subProjectId") int subProjectId, @ModelAttribute Task task) throws SQLException {
         task.setSubprojectId(subProjectId);
         taskService.createTask(task);
         int taskId = task.getTaskId();
