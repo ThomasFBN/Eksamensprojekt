@@ -26,11 +26,12 @@ public class ProjectRepository {
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
 
         {
-            String SQL = "INSERT INTO PROJECTS (projectName,user_id) VALUES (?,?)";
+            String SQL = "INSERT INTO PROJECTS (projectName,user_id, status) VALUES (?,?,?)";
 
             try (PreparedStatement ps = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, project.getProjectName());
                 ps.setInt(2, user_id);
+                ps.setString(3,project.getStatus());
 
 
                 int rowsAffected = ps.executeUpdate();

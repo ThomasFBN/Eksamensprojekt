@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -52,17 +52,14 @@
 <div class="action.container">
     <div class="action-links">
         <a th:href="@{'/showProjects/' + ${user.getUser_ID()}}">
-        <h2>View ongoing project</h2>
+            <h2>View ongoing project</h2>
         </a>
-        <form method="post" action="/projectManager">
-            <input type="hidden" name="userId" th:value="${user.getUser_ID()}">
-            <label for="name">Name:</label>
-            <input type="text" id="Name" name="projectName" placeholder="Name">
-            <br>
-            <button class="bn37 bn3637">Create project</button>
-        </form>
+        <a th:href="@{'/createProject'}">
+            <h2>Create Project</h2>
+        </a>
 
     </div>
+
 </div>
 </body>
 </html>

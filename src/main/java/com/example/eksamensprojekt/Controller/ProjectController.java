@@ -2,6 +2,7 @@ package com.example.eksamensprojekt.Controller;
 
 import com.example.eksamensprojekt.Model.Project;
 import com.example.eksamensprojekt.Model.SubProject;
+import com.example.eksamensprojekt.Model.Task;
 import com.example.eksamensprojekt.Model.User;
 import com.example.eksamensprojekt.Service.ProjectService;
 import com.example.eksamensprojekt.Service.UserService;
@@ -23,9 +24,20 @@ public class ProjectController {
         this.userService = userService;
 
     }
+    @GetMapping("/createProject")
+    public String showCreateProjectForm(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("userId", user.getUser_ID());
+            model.addAttribute("project", new Project());
+            return "createProject";
+        } else {
+            return "redirect:/login";
+        }
+    }
 
-    @PostMapping("/projectManager")
-    public String createProject(@ModelAttribute Project project, @RequestParam int userId) throws SQLException {
+    @PostMapping("/createProject")
+    public String postCreateProject(@ModelAttribute Project project, @RequestParam int userId) throws SQLException {
         projectService.createProject(project, userId);
         return "redirect:/projectManager";
     }
