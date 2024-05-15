@@ -1,10 +1,12 @@
 package com.example.eksamensprojekt.Controller;
 
+import com.example.eksamensprojekt.Model.Project;
 import com.example.eksamensprojekt.Model.SubProject;
 import com.example.eksamensprojekt.Model.Task;
 import com.example.eksamensprojekt.Model.User;
 import com.example.eksamensprojekt.Service.SubProjectService;
 import com.example.eksamensprojekt.Service.TaskService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -59,13 +61,18 @@ public class SubProjectController {
         return "redirect:/projectDetails/" + projectId;
     }
 
-
-
-
-
-
-
-
-
-
+    @PostMapping("/deleteSubProject/{id}")
+    public String deleteSubProject(@PathVariable("id") int id) throws SQLException {
+        int projectId = subProjectService.findSubProjectById(id).getProjectId();
+        SubProject subProject = subProjectService.findSubProjectById(id);
+        subProjectService.deleteSubProject(id);
+        return "redirect:/projectDetails/" + projectId;
+    }
 }
+
+
+
+
+
+
+

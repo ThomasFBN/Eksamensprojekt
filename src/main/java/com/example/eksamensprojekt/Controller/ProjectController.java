@@ -68,10 +68,11 @@ public class ProjectController {
 
 
     @PostMapping("/deleteProject/{id}")
-    public String deleteProject(@PathVariable("id") int id) throws SQLException {
+    public String deleteProject(@PathVariable("id") int id, HttpSession session) throws SQLException {
+        int userId = ((User) session.getAttribute("user")).getUser_ID();
         Project project = projectService.findProjectById(id);
         projectService.deleteProject(id);
-        return "redirect:/showProjects/";
+        return "redirect:/showProjects/" + userId;
     }
 
     @GetMapping("/editProject/{projectId}")

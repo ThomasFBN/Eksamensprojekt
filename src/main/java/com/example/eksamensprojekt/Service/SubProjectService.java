@@ -42,6 +42,8 @@ public class SubProjectService {
     public void deleteSubProject(int subProject_id) {
         subProjectRepository.deleteSubProject(subProject_id);
     }
+
+
     public SubProject findSubProjectById(int subProjectId) throws SQLException {
         return subProjectRepository.findSubProjectById(subProjectId);
     }

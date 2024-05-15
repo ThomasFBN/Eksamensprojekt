@@ -11,6 +11,17 @@
             document.getElementById("table_users").style.display = "block";
             document.getElementById("table_tasks").style.display = "none";
         }
+
+            function deleteFunction(event) {
+            event.preventDefault();
+            var confirmation = confirm("Are you sure you want to delete?");
+
+            if (confirmation) {
+            window.location.href = event.currentTarget.getAttribute('href');
+        } else {
+            console.log("Deletion canceled.");
+        }
+            }
     </script>
     <meta charset="UTF-8">
     <title>ProjectDetails</title>
@@ -99,9 +110,9 @@
             </td>
             <td>
                 <div class="edit-delete-buttons">
-                    <a th:href="@{'/deleteTask/' + ${task.taskId}}">
-                        <button class="bn37 bn3637">Delete</button>
-                    </a>
+                    <form th:action="@{'/deleteTask/' + ${task.taskId}}" method="post">
+                        <button type="submit" class="bn37 bn3637">Delete</button>
+                    </form>
                     <a th:href="@{'/editTask/' + ${task.taskId}}">
                         <button class="bn37 bn3637">Edit</button>
                     </a>

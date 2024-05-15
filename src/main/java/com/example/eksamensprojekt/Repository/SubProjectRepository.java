@@ -91,12 +91,16 @@ public class SubProjectRepository {
         return users;
     }
 
-    public void deleteSubProject(int subtask_id) {
+    public void deleteSubProject(int subProject_id) {
         try {
             Connection con = ConnectionManager.getConnection(db_url,db_username,db_password);
-            String SQL = "DELETE FROM subtask WHERE subProject_id = ?";
-            PreparedStatement pstmt = con.prepareStatement(SQL);
-            pstmt.setInt(1, subtask_id);
+            String deleteTasksSQL = "DELETE FROM tasks WHERE subProject_id = ?";
+            PreparedStatement deleteTasksStmt = con.prepareStatement(deleteTasksSQL);
+            deleteTasksStmt.setInt(1, subProject_id);
+            deleteTasksStmt.executeUpdate();
+            String SQL = "DELETE FROM subProjects WHERE subProject_id = ?";
+            PreparedStatement pstmt = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setInt(1, subProject_id);
             pstmt.executeUpdate();
         } catch (Exception e) {
             throw new RuntimeException(e);

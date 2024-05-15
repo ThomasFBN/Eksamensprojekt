@@ -81,8 +81,8 @@
                     <a th:href="@{'/editProject/' + ${project.project_id}}">
                         <button class="bn37 bn3637">Edit</button>
                     </a>
-                    <a th:href="@{'/deleteProject/' + ${project.project_id}}" onclick="deleteFunction(event)">
-                        <button class="bn37 bn3637"> Delete</button>
+                    <a th:action="@{'/deleteProject/' + ${project.project_id}}" method="post" onclick="deleteFunction(event)">
+                        <button class="bn37 bn3637">Delete</button>
                     </a>
                 </div>
             </td>

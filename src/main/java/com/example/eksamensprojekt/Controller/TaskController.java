@@ -1,5 +1,6 @@
 package com.example.eksamensprojekt.Controller;
 
+import com.example.eksamensprojekt.Model.SubProject;
 import com.example.eksamensprojekt.Model.Task;
 import com.example.eksamensprojekt.Service.TaskService;
 import org.springframework.stereotype.Controller;
@@ -49,6 +50,14 @@ public class TaskController {
         int subprojectId = taskService.findTaskByTaskId(taskId).getSubprojectId();
 
         return "redirect:/subProjectDetails/" + subprojectId;
+    }
+
+    @PostMapping("/deleteTask/{id}")
+    public String deleteTask(@PathVariable("id") int id) throws SQLException {
+        int subProjectid= taskService.findTaskByTaskId(id).getSubprojectId();
+        Task task = taskService.findTaskByTaskId(id);
+        taskService.deleteTask(id);
+        return "redirect:/subProjectDetails/" + subProjectid;
     }
 
 

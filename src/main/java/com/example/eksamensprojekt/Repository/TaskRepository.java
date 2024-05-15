@@ -44,14 +44,10 @@ public class TaskRepository {
     public void deleteTask(int task_id) {
         try {
             Connection con = ConnectionManager.getConnection(db_url, db_username, db_password);
-            String SQL = "DELETE FROM subtask WHERE task_id = ?";
-            String SQL1 = "DELETE FROM task WHERE task_id = ?";
+            String SQL = "DELETE FROM tasks WHERE task_id = ?";
             PreparedStatement pstmt = con.prepareStatement(SQL);
-            PreparedStatement pstmt1 = con.prepareStatement(SQL1);
             pstmt.setInt(1, task_id);
             pstmt.executeUpdate();
-            pstmt1.setInt(1, task_id);
-            pstmt1.executeUpdate();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
