@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class TaskRepository {
@@ -41,6 +43,26 @@ public class TaskRepository {
         }
     }
 
+    public List<Task> showAllTasks(int userId) throws SQLException {
+        List<Task> tasks = new ArrayList<>();
+        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
+        String SQL = "SELECT * FROM TASKS WHERE USER_ID = ?";
+        try (PreparedStatement ps = connection.prepareStatement(SQL)) {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Task task = new Task();
+                ps.setString(1, task.getTaskName());
+                ps.setInt(2, task.getSubprojectId());
+                ps.setDate(3, java.sql.Date.valueOf(task.getStartDate()));
+                ps.setDate(4, java.sql.Date.valueOf(task.getEndDate()));
+                ps.setInt(5, task.getEstTime());
+                ps.setString(6, task.getStatus());
+                tasks.add(task);
+            }
+        }
+        return tasks;
+    }
     public void deleteTask(int task_id) {
         try {
             Connection con = ConnectionManager.getConnection(db_url, db_username, db_password);

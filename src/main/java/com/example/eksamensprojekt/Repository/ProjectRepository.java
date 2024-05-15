@@ -178,7 +178,7 @@ public class ProjectRepository {
             Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
             connection.setAutoCommit(false);
 
-            String SQL1 = "DELETE FROM project WHERE project_id = ?";
+            String SQL1 = "DELETE FROM projects WHERE project_id = ?";
             PreparedStatement deleteProjectStatement = connection.prepareStatement(SQL1);
             deleteProjectStatement.setInt(1, project_id);
             deleteProjectStatement.executeUpdate();

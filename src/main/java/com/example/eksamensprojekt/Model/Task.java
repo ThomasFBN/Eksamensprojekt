@@ -3,6 +3,7 @@ package com.example.eksamensprojekt.Model;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Task {
     private int taskId;
@@ -15,6 +16,8 @@ public class Task {
     private String status;
     private int userId;
     private String username;
+
+
 
     public Task() {
     }

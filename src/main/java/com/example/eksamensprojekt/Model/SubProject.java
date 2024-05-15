@@ -1,9 +1,13 @@
 package com.example.eksamensprojekt.Model;
+
+import java.util.List;
+
 public class SubProject {
     private int subProjectId;
     private String subProjectName;
     private String status;
     private int projectId;
+
 
     public SubProject() {
     }
@@ -45,4 +49,5 @@ public class SubProject {
     public void setProjectId(int projectId) {
         this.projectId = projectId;
     }
+
 }

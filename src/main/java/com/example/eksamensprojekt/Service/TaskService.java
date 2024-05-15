@@ -5,6 +5,7 @@ import com.example.eksamensprojekt.Repository.TaskRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Service
 public class TaskService {
@@ -17,7 +18,9 @@ public class TaskService {
     public void createTask(Task task) throws SQLException {
         taskRepository.createTask(task);
     }
-
+    public List<Task> showAllTasks(int userId) throws SQLException {
+        return taskRepository.showAllTasks(userId);
+    }
     public void editTask(Task task, int task_id) {
         taskRepository.editTask(task, task_id);
     }
