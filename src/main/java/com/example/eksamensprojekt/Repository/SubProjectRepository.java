@@ -94,10 +94,6 @@ public class SubProjectRepository {
     public void deleteSubProject(int subProject_id) {
         try {
             Connection con = ConnectionManager.getConnection(db_url,db_username,db_password);
-            String deleteTasksSQL = "DELETE FROM tasks WHERE subProject_id = ?";
-            PreparedStatement deleteTasksStmt = con.prepareStatement(deleteTasksSQL);
-            deleteTasksStmt.setInt(1, subProject_id);
-            deleteTasksStmt.executeUpdate();
             String SQL = "DELETE FROM subProjects WHERE subProject_id = ?";
             PreparedStatement pstmt = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             pstmt.setInt(1, subProject_id);
