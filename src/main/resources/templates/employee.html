@@ -67,6 +67,7 @@
             <td>End Date</td>
             <td>Estimated Time</td>
             <td>Status</td>
+            <td>Edit task</td>
             <td>Mark as completed</td>
 
 
@@ -88,6 +89,13 @@
             </td>
             <td>
                 <p th:text="${task.status}"></p>
+            </td>
+            <td>
+                <div class="edit-delete-buttons">
+                    <a th:href="@{'/editTask/' + ${task.taskId}}">
+                        <button class="bn37 bn3637">Edit</button>
+                    </a>
+                </div>
             </td>
 
             <td>
