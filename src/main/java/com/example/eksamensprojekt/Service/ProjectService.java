@@ -46,4 +46,8 @@ public class ProjectService {
         projectRepository.editProject(project, projectId);
     }
 
-}
+    public List<Project> showUserProjects(int userId) throws SQLException {
+        return projectRepository.showUserProjects(userId);
+    }
+
+    }

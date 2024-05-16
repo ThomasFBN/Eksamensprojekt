@@ -47,12 +47,22 @@ public class TaskController {
         return "editTask";
     }
 
+
     @PostMapping("/editTask/{taskId}")
-    public String editTask(@ModelAttribute Task task, @PathVariable("taskId") int taskId) throws SQLException {
+    public String editTask(@ModelAttribute Task task, @PathVariable("taskId") int taskId, HttpSession session) throws SQLException {
         taskService.editTask(task, taskId);
         int subprojectId = taskService.findTaskByTaskId(taskId).getSubprojectId();
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            String role = user.getRole();
+            if ("employee".equals(role)) {
+                return "redirect:/employee/" + user.getUser_ID();
+            } else if ("pjManager".equals(role)) {
+                return "redirect:/subProjectDetails/" + subprojectId;
+            }
+        }
 
-        return "redirect:/subProjectDetails/" + subprojectId;
+        return "redirect:/";
     }
 
     @PostMapping("/deleteTask/{id}")
@@ -83,7 +93,6 @@ public class TaskController {
         }
         return "redirect:/";
     }
-
 
 
 

@@ -190,6 +190,46 @@ public class ProjectRepository {
     }
 
 
+    public List<Project> showUserProjects(int userId) throws SQLException {
+        List<Project> projects = new ArrayList<>();
+        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
+
+        String taskSQL = "SELECT * FROM tasks WHERE user_id = ?";
+        try (PreparedStatement taskPS = connection.prepareStatement(taskSQL)) {
+            taskPS.setInt(1, userId);
+            ResultSet taskRS = taskPS.executeQuery();
+
+            while (taskRS.next()) {
+                int subprojectId = taskRS.getInt("subproject_id");
+
+                String subprojectSQL = "SELECT * FROM subprojects WHERE subproject_id = ?";
+                try (PreparedStatement subprojectPS = connection.prepareStatement(subprojectSQL)) {
+                    subprojectPS.setInt(1, subprojectId);
+                    ResultSet subprojectRS = subprojectPS.executeQuery();
+
+                    if (subprojectRS.next()) {
+                        int projectId = subprojectRS.getInt("project_id");
+
+                        String projectSQL = "SELECT * FROM projects WHERE project_id = ?";
+                        try (PreparedStatement projectPS = connection.prepareStatement(projectSQL)) {
+                            projectPS.setInt(1, projectId);
+                            ResultSet projectRS = projectPS.executeQuery();
+
+                            if (projectRS.next()) {
+                                Project project = new Project();
+                                project.setProject_id(projectRS.getInt("project_id"));
+                                project.setProjectName(projectRS.getString("projectName"));
+                                project.setStatus(projectRS.getString("status"));
+                                projects.add(project);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return projects;
+    }
 
 
 }
