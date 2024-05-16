@@ -2,7 +2,9 @@ package com.example.eksamensprojekt.Controller;
 
 import com.example.eksamensprojekt.Model.SubProject;
 import com.example.eksamensprojekt.Model.Task;
+import com.example.eksamensprojekt.Model.User;
 import com.example.eksamensprojekt.Service.TaskService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Controller
 public class TaskController {
@@ -58,6 +61,27 @@ public class TaskController {
         Task task = taskService.findTaskByTaskId(id);
         taskService.deleteTask(id);
         return "redirect:/subProjectDetails/" + subProjectid;
+    }
+
+    @GetMapping("/employee/{userId}")
+    public String showAllTasks(@PathVariable("userId") int userId, Model model, HttpSession session) throws SQLException {
+        User user = (User) session.getAttribute("user");
+        if (user != null && user.getUser_ID() == userId) {
+            List<Task> tasks = taskService.showAllTasks(userId);
+            model.addAttribute("tasks", tasks);
+            return "employee";
+        }
+        return "redirect:/";
+
+    }
+    @PostMapping("/employee/{userId}/complete/{taskId}")
+    public String markTaskAsCompleted(@PathVariable("userId") int userId, @PathVariable("taskId") int taskId, HttpSession session) throws SQLException {
+        User user = (User) session.getAttribute("user");
+        if (user != null && user.getUser_ID() == userId) {
+            taskService.markTaskAsCompleted(taskId);
+            return "redirect:/employee/" + userId;
+        }
+        return "redirect:/";
     }
 
 

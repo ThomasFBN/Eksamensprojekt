@@ -33,15 +33,16 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginPost(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
+    public String loginPost(@RequestParam String username, @RequestParam String password, HttpSession session, Model model  ) {
         try {
             User user = userService.checkLogin(username, password);
+            int userId = user.getUser_ID();
             if (user != null && user.getRole().equals("admin")) {
                 session.setAttribute("user", user);
                 return "redirect:/admin";
             } else if (user != null && user.getRole().equals("employee")) {
                 session.setAttribute("user", user);
-                return "redirect:/employee";
+                return "redirect:/employee/" + userId;
             } else if (user != null && user.getRole().equals("pjManager")) {
                 session.setAttribute("user", user);
                 return "redirect:/projectManager";

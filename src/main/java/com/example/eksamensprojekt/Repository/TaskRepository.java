@@ -52,17 +52,19 @@ public class TaskRepository {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Task task = new Task();
-                ps.setString(1, task.getTaskName());
-                ps.setInt(2, task.getSubprojectId());
-                ps.setDate(3, java.sql.Date.valueOf(task.getStartDate()));
-                ps.setDate(4, java.sql.Date.valueOf(task.getEndDate()));
-                ps.setInt(5, task.getEstTime());
-                ps.setString(6, task.getStatus());
+                task.setTaskId(rs.getInt("task_id"));
+                task.setTaskName(rs.getString("taskName"));
+                task.setSubprojectId(rs.getInt("subproject_id"));
+                task.setStartDate(rs.getDate("startDate").toLocalDate());
+                task.setEndDate(rs.getDate("endDate").toLocalDate());
+                task.setEstTime(rs.getInt("estTime"));
+                task.setStatus(rs.getString("status"));
                 tasks.add(task);
             }
         }
         return tasks;
     }
+
     public void deleteTask(int task_id) {
         try {
             Connection con = ConnectionManager.getConnection(db_url, db_username, db_password);
@@ -123,4 +125,16 @@ public class TaskRepository {
 
 
     }
+    public void markTaskAsCompleted(int taskId) throws SQLException {
+        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
+        String SQL = "UPDATE TASKS SET STATUS = 'Completed' WHERE TASK_ID = ?";
+
+        try (PreparedStatement ps = connection.prepareStatement(SQL)) {
+            ps.setInt(1, taskId);
+            ps.executeUpdate();
+        }
+    }
+
+
 }
+
