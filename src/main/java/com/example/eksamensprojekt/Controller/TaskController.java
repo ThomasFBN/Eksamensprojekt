@@ -24,18 +24,25 @@ public class TaskController {
     }
 
     @GetMapping("/subProjectDetails/{subProjectId}/createTask")
-    public String showCreateTaskForm(@PathVariable("subProjectId") int subProjectId, Model model) {
-        model.addAttribute("subProjectId", subProjectId);
-        model.addAttribute("task", new Task());
-        return "createTask";
+    public String showCreateTaskForm(@PathVariable("subProjectId") int subProjectId, Model model, HttpSession session) {
+        if ("pjManager".equals(((User) session.getAttribute("user")).getRole())) {
+            model.addAttribute("subProjectId", subProjectId);
+            model.addAttribute("task", new Task());
+            return "createTask";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/subProjectDetails/{subProjectId}/createTask")
-    public String createTask(@PathVariable("subProjectId") int subProjectId, @ModelAttribute Task task) throws SQLException {
-        task.setSubprojectId(subProjectId);
-        taskService.createTask(task);
-        int taskId = task.getTaskId();
-        return "redirect:/subProjectDetails/" + subProjectId;
+    public String createTask(@PathVariable("subProjectId") int subProjectId, @ModelAttribute Task task, HttpSession session) throws SQLException {
+        if ("pjManager".equals(((User) session.getAttribute("user")).getRole())) {
+            task.setSubprojectId(subProjectId);
+            taskService.createTask(task);
+            return "redirect:/subProjectDetails/" + subProjectId;
+        } else {
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/editTask/{taskId}")
@@ -66,11 +73,14 @@ public class TaskController {
     }
 
     @PostMapping("/deleteTask/{id}")
-    public String deleteTask(@PathVariable("id") int id) throws SQLException {
-        int subProjectid= taskService.findTaskByTaskId(id).getSubprojectId();
-        Task task = taskService.findTaskByTaskId(id);
-        taskService.deleteTask(id);
-        return "redirect:/subProjectDetails/" + subProjectid;
+    public String deleteTask(@PathVariable("id") int id, HttpSession session) throws SQLException {
+        if ("pjManager".equals(((User) session.getAttribute("user")).getRole())) {
+            int subProjectId = taskService.findTaskByTaskId(id).getSubprojectId();
+            taskService.deleteTask(id);
+            return "redirect:/subProjectDetails/" + subProjectId;
+        } else {
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/employee/{userId}")

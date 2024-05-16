@@ -20,8 +20,8 @@
 
         <button class="btn" type="submit">Save</button>
 
-        <a th:href="@{/projects/{user_id}(user_id=${userId})}">
-            <button type="button" class="btn">Return to projects</button>
+        <a th:href="@{/projectDetails/{projectId}(projectId=${subProject.projectId})}">
+            <button type="button" class="btn">Return to SubProjects</button>
         </a>
     </form>
 </div>
