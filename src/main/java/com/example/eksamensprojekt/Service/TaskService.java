@@ -22,6 +22,9 @@ public class TaskService {
     public List<Task> showAllTasks(int userId) throws SQLException {
         return taskRepository.showAllTasks(userId);
     }
+    public List<Task> showCompletedTasks(int userId) throws SQLException {
+        return taskRepository.showCompletedTasks(userId);
+    }
 
     public void editTask(Task task, int task_id) {
         taskRepository.editTask(task, task_id);
@@ -39,4 +42,10 @@ public class TaskService {
     public void markTaskAsCompleted(int taskId) throws SQLException {
         taskRepository.markTaskAsCompleted(taskId);
     }
-}
+    public void assignUserToTask(int taskId, int userId) throws SQLException {
+        taskRepository.assignUserToTask(taskId, userId);
+    }
+
+
+
+    }

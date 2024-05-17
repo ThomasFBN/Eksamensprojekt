@@ -1,16 +1,12 @@
 package com.example.eksamensprojekt.Controller;
 
-import com.example.eksamensprojekt.Model.SubProject;
 import com.example.eksamensprojekt.Model.Task;
 import com.example.eksamensprojekt.Model.User;
 import com.example.eksamensprojekt.Service.TaskService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -18,8 +14,7 @@ import java.util.List;
 @Controller
 public class TaskController {
     private TaskService taskService;
-
-    public TaskController(TaskService taskService) {
+    public TaskController(TaskService taskService ) {
         this.taskService = taskService;
     }
 
@@ -46,13 +41,19 @@ public class TaskController {
     }
 
     @GetMapping("/editTask/{taskId}")
-    public String getEditTaskForm(@PathVariable("taskId") int taskId, Model model) throws SQLException {
-        Task task = taskService.findTaskByTaskId(taskId);
-        model.addAttribute("task", task);
-        model.addAttribute("taskId", taskId);
-
-        return "editTask";
+    public String getEditTaskForm(@PathVariable("taskId") int taskId, Model model, HttpSession session) throws SQLException {
+        User user = (User) session.getAttribute("user");
+        if (user != null && ("pjManager".equals(user.getRole()) || "employee".equals(user.getRole()))) {
+            Task task = taskService.findTaskByTaskId(taskId);
+            model.addAttribute("task", task);
+            model.addAttribute("taskId", taskId);
+            return "editTask";
+        } else {
+            return "redirect:/";
+        }
     }
+
+
 
 
     @PostMapping("/editTask/{taskId}")
@@ -84,16 +85,21 @@ public class TaskController {
     }
 
     @GetMapping("/employee/{userId}")
-    public String showAllTasks(@PathVariable("userId") int userId, Model model, HttpSession session) throws SQLException {
+    public String showTasks(@PathVariable("userId") int userId, Model model, HttpSession session) throws SQLException {
         User user = (User) session.getAttribute("user");
         if (user != null && user.getUser_ID() == userId) {
-            List<Task> tasks = taskService.showAllTasks(userId);
-            model.addAttribute("tasks", tasks);
+            List<Task> allTasks = taskService.showAllTasks(userId);
+            List<Task> completedTasks = taskService.showCompletedTasks(userId);
+
+            model.addAttribute("tasks", allTasks);
+            model.addAttribute("completedTasks", completedTasks);
+
             return "employee";
         }
         return "redirect:/";
-
     }
+
+
     @PostMapping("/employee/{userId}/complete/{taskId}")
     public String markTaskAsCompleted(@PathVariable("userId") int userId, @PathVariable("taskId") int taskId, HttpSession session) throws SQLException {
         User user = (User) session.getAttribute("user");
@@ -104,7 +110,19 @@ public class TaskController {
         return "redirect:/";
     }
 
-
-
-
+    @PostMapping("/assignUserToTask")
+    public String assignUserToTask(@RequestParam("taskId") int taskId, @RequestParam("userId") int userId, HttpSession session) throws SQLException {
+        if ("pjManager".equals(((User) session.getAttribute("user")).getRole())) {
+            taskService.assignUserToTask(taskId, userId);
+            int subProjectId = taskService.findTaskByTaskId(taskId).getSubprojectId();
+            return "redirect:/subProjectDetails/" + subProjectId;
+        } else {
+            return "redirect:/";
+        }
+    }
 }
+
+
+
+
+

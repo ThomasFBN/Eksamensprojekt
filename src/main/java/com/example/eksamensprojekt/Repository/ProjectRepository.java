@@ -2,7 +2,6 @@ package com.example.eksamensprojekt.Repository;
 
 import com.example.eksamensprojekt.Model.Project;
 import com.example.eksamensprojekt.Model.SubProject;
-import com.example.eksamensprojekt.Model.User;
 import com.example.eksamensprojekt.util.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
@@ -31,7 +30,7 @@ public class ProjectRepository {
             try (PreparedStatement ps = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, project.getProjectName());
                 ps.setInt(2, user_id);
-                ps.setString(3,project.getStatus());
+                ps.setString(3, project.getStatus());
 
 
                 int rowsAffected = ps.executeUpdate();
@@ -116,30 +115,6 @@ public class ProjectRepository {
 
 
     }
-
-    public List<User> findUsersByProjectId(int projectId) throws SQLException {
-        List<User> users = new ArrayList<>();
-        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
-
-        String SQL = "SELECT u.user_id, u.username " +
-                "FROM users u " +
-                "INNER JOIN projects p ON u.user_id = p.user_id " +
-                "WHERE p.project_id = ?";
-
-        try (PreparedStatement ps = connection.prepareStatement(SQL)) {
-            ps.setInt(1, projectId);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                User user = new User();
-                user.setUser_ID(rs.getInt("user_id"));
-                user.setUsername(rs.getString("username"));
-
-                users.add(user);
-            }
-        }
-        return users;
-    }
-
     public void editProject(Project project, int projectId) throws SQLException {
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
         String SQL = "UPDATE Projects SET projectName=?, status=? WHERE project_id=?";
@@ -166,9 +141,11 @@ public class ProjectRepository {
             if (rs.next()) {
                 project = new Project();
                 project.setProject_id(rs.getInt("project_id"));
+                project.setProjectName(rs.getString("projectName"));
+                project.setStatus(rs.getString("status"));
             }
-        return project;
-    }
+            return project;
+        }
 
     }
 
@@ -189,7 +166,7 @@ public class ProjectRepository {
         }
     }
 
-
+/*
     public List<Project> showUserProjects(int userId) throws SQLException {
         List<Project> projects = new ArrayList<>();
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
@@ -230,6 +207,8 @@ public class ProjectRepository {
 
         return projects;
     }
+
+ */
 
 
 }

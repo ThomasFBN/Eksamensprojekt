@@ -2,9 +2,7 @@ package com.example.eksamensprojekt.Service;
 
 import com.example.eksamensprojekt.Model.Project;
 import com.example.eksamensprojekt.Model.SubProject;
-import com.example.eksamensprojekt.Model.User;
 import com.example.eksamensprojekt.Repository.ProjectRepository;
-import com.example.eksamensprojekt.Repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -30,10 +28,6 @@ public class ProjectService {
         return projectRepository.findSubProjectsByProjectId(project_id);
     }
 
-    public List<User> findUsersByProjectId(int projectId) throws SQLException {
-        return projectRepository.findUsersByProjectId(projectId);
-
-    }
 
     public Project findProjectById(int id) throws SQLException {
         return projectRepository.findProjectById(id);
@@ -42,12 +36,10 @@ public class ProjectService {
     public void deleteProject(int project_id) {
         projectRepository.deleteProject(project_id);
     }
+
     public void editProject(Project project, int projectId) throws SQLException {
         projectRepository.editProject(project, projectId);
     }
 
-    public List<Project> showUserProjects(int userId) throws SQLException {
-        return projectRepository.showUserProjects(userId);
-    }
 
-    }
+}

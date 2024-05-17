@@ -84,6 +84,7 @@
             <td>Estimated Time</td>
             <td>Status</td>
             <td>Assigned User</td>
+            <td>Assign User</td>
             <td>Delete/Edit Task</td>
 
         </tr>
@@ -107,6 +108,15 @@
             </td>
             <td>
                 <p th:text="${task.username}"></p>
+            </td>
+            <td>
+                <form th:action="@{'/assignUserToTask'}" method="post">
+                    <input type="hidden" name="taskId" th:value="${task.taskId}">
+                    <select name="userId" required>
+                        <option th:each="user : ${users}" th:value="${user.user_ID}" th:text="${user.username}"></option>
+                    </select>
+                    <button type="submit" class="bn37 bn3637">Assign</button>
+                </form>
             </td>
             <td>
                 <div class="edit-delete-buttons">
@@ -136,7 +146,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="user: ${users}" class="user-row">
+        <tr th:each="user: ${subProjectUsers}" class="user-row">
             <td>
                 <p th:text="${user.username}"></p>
             </td>

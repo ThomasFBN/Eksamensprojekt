@@ -1,6 +1,5 @@
 package com.example.eksamensprojekt.Repository;
 
-import com.example.eksamensprojekt.Model.Project;
 import com.example.eksamensprojekt.Model.SubProject;
 import com.example.eksamensprojekt.Model.Task;
 import com.example.eksamensprojekt.Model.User;
@@ -74,9 +73,10 @@ public class SubProjectRepository {
         List<User> users = new ArrayList<>();
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
 
-        String SQL = "SELECT u.* FROM users u " +
+        String SQL = "SELECT DISTINCT u.* FROM users u " +
                 "INNER JOIN tasks t ON u.user_id = t.user_id " +
                 "WHERE t.subproject_id = ?";
+
 
         try (PreparedStatement ps = connection.prepareStatement(SQL)) {
             ps.setInt(1, subProjectId);
@@ -93,7 +93,7 @@ public class SubProjectRepository {
 
     public void deleteSubProject(int subProject_id) {
         try {
-            Connection con = ConnectionManager.getConnection(db_url,db_username,db_password);
+            Connection con = ConnectionManager.getConnection(db_url, db_username, db_password);
             String SQL = "DELETE FROM subProjects WHERE subProject_id = ?";
             PreparedStatement pstmt = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             pstmt.setInt(1, subProject_id);

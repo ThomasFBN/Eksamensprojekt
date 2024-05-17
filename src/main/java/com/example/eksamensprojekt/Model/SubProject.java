@@ -1,6 +1,6 @@
 package com.example.eksamensprojekt.Model;
 
-import java.util.List;
+
 
 public class SubProject {
     private int subProjectId;

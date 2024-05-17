@@ -15,16 +15,17 @@
         <input id="task_name" type="text" th:name="taskName" th:value="${task.taskName}" required>
 
         <label for="task_start_date">Start Date</label>
-        <input id="task_start_date" type="date" th:field="${task.startDate}" min="2000-01-01" max="3000-12-31" required>
+        <input id="task_start_date" type="date" th:field="*{task.startDate}" min="2000-01-01" max="3000-12-31" required>
 
         <label for="task_end_date">End Date</label>
-        <input id="task_end_date" type="date" th:field="${task.endDate}" min="2000-01-01" max="3000-12-31" required>
+        <input id="task_end_date" type="date" th:field="*{task.endDate}" min="2000-01-01" max="3000-12-31" required>
+
 
         <label for="task_estimated_time">Estimated Time (hours)</label>
         <input id="task_estimated_time" type="number" th:name="estimatedTime" th:field="${task.estTime}" required>
 
         <label for="task_status">Status</label>
-        <select id="task_status" name="status" th:value="${task.status}" required>
+        <select id="task_status" name="status" th:field="${task.status}" required>
             <option value="Not Started">Not Started</option>
             <option value="In Progress">In Progress</option>
             <option value="Completed">Completed</option>

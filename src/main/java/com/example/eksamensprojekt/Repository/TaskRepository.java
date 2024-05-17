@@ -1,6 +1,5 @@
 package com.example.eksamensprojekt.Repository;
 
-import com.example.eksamensprojekt.Model.Project;
 import com.example.eksamensprojekt.Model.Task;
 import com.example.eksamensprojekt.util.ConnectionManager;
 import org.springframework.beans.factory.annotation.Value;
@@ -46,7 +45,7 @@ public class TaskRepository {
     public List<Task> showAllTasks(int userId) throws SQLException {
         List<Task> tasks = new ArrayList<>();
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
-        String SQL = "SELECT * FROM TASKS WHERE USER_ID = ?";
+        String SQL = "SELECT * FROM TASKS WHERE USER_ID = ? AND STATUS <> 'Completed'";
         try (PreparedStatement ps = connection.prepareStatement(SQL)) {
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
@@ -64,6 +63,29 @@ public class TaskRepository {
         }
         return tasks;
     }
+
+    public List<Task> showCompletedTasks(int userId) throws SQLException {
+        List<Task> completedTasks = new ArrayList<>();
+        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
+        String SQL = "SELECT * FROM TASKS WHERE USER_ID = ? AND STATUS = 'Completed'";
+        try (PreparedStatement ps = connection.prepareStatement(SQL)) {
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Task task = new Task();
+                task.setTaskId(rs.getInt("task_id"));
+                task.setTaskName(rs.getString("taskName"));
+                task.setSubprojectId(rs.getInt("subproject_id"));
+                task.setStartDate(rs.getDate("startDate").toLocalDate());
+                task.setEndDate(rs.getDate("endDate").toLocalDate());
+                task.setEstTime(rs.getInt("estTime"));
+                task.setStatus(rs.getString("status"));
+                completedTasks.add(task);
+            }
+        }
+        return completedTasks;
+    }
+
 
     public void deleteTask(int task_id) {
         try {
@@ -125,12 +147,23 @@ public class TaskRepository {
 
 
     }
+
     public void markTaskAsCompleted(int taskId) throws SQLException {
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
         String SQL = "UPDATE TASKS SET STATUS = 'Completed' WHERE TASK_ID = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(SQL)) {
             ps.setInt(1, taskId);
+            ps.executeUpdate();
+        }
+    }
+
+    public void assignUserToTask(int taskId, int userId) throws SQLException {
+        Connection connection = DriverManager.getConnection(db_url, db_username, db_password);
+        String SQL = "UPDATE tasks SET user_id = ? WHERE task_id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(SQL)) {
+            ps.setInt(1, userId);
+            ps.setInt(2, taskId);
             ps.executeUpdate();
         }
     }

@@ -16,8 +16,12 @@
         <label for="projectName">Project name:</label>
         <input id="projectName" type="text" name="projectName" th:value="${project.projectName}">
 
-        <label for="Status">Status:</label>
-        <input id="Status" type="text" name="status" th:value="${project.status}">
+        <label for="Project_status">Status:</label>
+        <select id="Project_status" name="status" th:value="${project.status}" required>
+            <option value="Not Started" th:selected="${project.status == 'Not Started'}">Not Started</option>
+            <option value="In Progress" th:selected="${project.status == 'In Progress'}">In Progress</option>
+            <option value="Completed" th:selected="${project.status == 'Completed'}">Completed</option>
+        </select>
 
         <button class="btn" type="submit">Save</button>
 

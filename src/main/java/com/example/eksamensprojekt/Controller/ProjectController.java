@@ -60,10 +60,8 @@ public class ProjectController {
         User user = (User) session.getAttribute("user");
         if (user != null && "pjManager".equals(user.getRole())) {
             List<SubProject> subProjects = projectService.findSubProjectsByProjectId(projectId);
-            List<User> users = projectService.findUsersByProjectId(projectId);
 
             model.addAttribute("subProjects", subProjects);
-            model.addAttribute("users", users);
 
             return "projectDetails";
         } else {
@@ -76,7 +74,6 @@ public class ProjectController {
         User user = (User) session.getAttribute("user");
         if (user != null && "pjManager".equals(user.getRole())) {
             int userId = user.getUser_ID();
-            Project project = projectService.findProjectById(id);
             projectService.deleteProject(id);
             return "redirect:/showProjects/" + userId;
         } else {

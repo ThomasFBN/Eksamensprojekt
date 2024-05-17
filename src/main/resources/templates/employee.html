@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script>
-        function showTasks() {
-            document.getElementById("table_tasks").style.display = "block";
-            document.getElementById("table_users").style.display = "none";
-        }
-
-    </script>
     <meta charset="UTF-8">
     <title>Employee</title>
     <link th:href="@{/projectManager.css}" rel="stylesheet">
+    <script>
+        function showTasks() {
+            document.getElementById("table_tasks").style.display = "block";
+            document.getElementById("table_completed_tasks").style.display = "none";
+        }
+
+        function showCompletedTasks() {
+            document.getElementById("table_tasks").style.display = "none";
+            document.getElementById("table_completed_tasks").style.display = "block";
+        }
+    </script>
 </head>
 <header>
     <nav class="container">
@@ -53,63 +57,70 @@
     </nav>
 </header>
 <body>
-<div class="background">
-</div>
+<div class="background"></div>
 <div class="center-box" id="buttons_details">
     <button onclick="showTasks()" class="bn37 bn3637">See all your tasks</button>
+    <button onclick="showCompletedTasks()" class="bn37 bn3637">Show Completed Tasks</button>
 </div>
 <div class="center-box" id="table_details">
     <table class="table" id="table_tasks" style="display: none;">
         <thead>
         <tr>
-            <td>Task Name</td>
-            <td>Start Date</td>
-            <td>End Date</td>
-            <td>Estimated Time</td>
-            <td>Status</td>
-            <td>Edit task</td>
-            <td>Mark as completed</td>
-
-
+            <th>Task Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Estimated Time</th>
+            <th>Status</th>
+            <th>Edit task</th>
+            <th>Mark as completed</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="task: ${tasks}" class="task-row">
+        <tr th:each="task : ${tasks}">
+            <td th:text="${task.taskName}"></td>
+            <td th:text="${task.startDate}"></td>
+            <td th:text="${task.endDate}"></td>
+            <td th:text="${task.estTime}"></td>
+            <td th:text="${task.status}"></td>
             <td>
-                <p th:text="${task.taskName}"></p>
+                <a th:href="@{'/editTask/' + ${task.taskId}}">
+                    <button class="bn37 bn3637">Edit</button>
+                </a>
             </td>
-            <td>
-                <p th:text="${task.startDate}"></p>
-            </td>
-            <td>
-                <p th:text="${task.endDate}"></p>
-            </td>
-            <td>
-                <p th:text="${task.estTime}"></p>
-            </td>
-            <td>
-                <p th:text="${task.status}"></p>
-            </td>
-            <td>
-                <div class="edit-delete-buttons">
-                    <a th:href="@{'/editTask/' + ${task.taskId}}">
-                        <button class="bn37 bn3637">Edit</button>
-                    </a>
-                </div>
-            </td>
-
             <td>
                 <form th:action="@{'/employee/' + ${userId} + '/complete/' + ${task.taskId}}" method="post">
                     <button type="submit">Mark as Completed</button>
                 </form>
-
-
             </td>
         </tr>
-
+        </tbody>
+    </table>
+    <table class="table" id="table_completed_tasks" style="display: none;">
+        <thead>
+        <tr>
+            <th>Task Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Estimated Time</th>
+            <th>Status</th>
+            <th>Edit task</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${completedTasks}">
+            <td th:text="${task.taskName}"></td>
+            <td th:text="${task.startDate}"></td>
+            <td th:text="${task.endDate}"></td>
+            <td th:text="${task.estTime}"></td>
+            <td th:text="${task.status}"></td>
+            <td>
+                <a th:href="@{'/editTask/' + ${task.taskId}}">
+                    <button class="bn37 bn3637">Edit</button>
+                </a>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>
 </body>
 </html>
-

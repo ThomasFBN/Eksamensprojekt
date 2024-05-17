@@ -1,11 +1,10 @@
 package com.example.eksamensprojekt.Controller;
 
-import com.example.eksamensprojekt.Model.Project;
 import com.example.eksamensprojekt.Model.SubProject;
 import com.example.eksamensprojekt.Model.Task;
 import com.example.eksamensprojekt.Model.User;
 import com.example.eksamensprojekt.Service.SubProjectService;
-import com.example.eksamensprojekt.Service.TaskService;
+import com.example.eksamensprojekt.Service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +16,12 @@ import java.util.List;
 @Controller
 public class SubProjectController {
     private SubProjectService subProjectService;
+    private UserService userService;
 
-    public SubProjectController(SubProjectService subProjectService) {
+
+    public SubProjectController(SubProjectService subProjectService, UserService userService) {
         this.subProjectService = subProjectService;
+        this.userService = userService;
     }
 
     @GetMapping("/projectDetails/{projectId}/createSubProject")
@@ -52,9 +54,13 @@ public class SubProjectController {
         User user = (User) session.getAttribute("user");
         if (user != null && "pjManager".equals(user.getRole())) {
             List<Task> tasks = subProjectService.findTasksBySubProjectId(subProjectId);
-            List<User> users = subProjectService.findUsersBySubProjectId(subProjectId);
+            List<User> allUsers = userService.showAllUsers();
+            List<User> subProjectUsers = subProjectService.findUsersBySubProjectId(subProjectId);
+
             model.addAttribute("tasks", tasks);
-            model.addAttribute("users", users);
+            model.addAttribute("users", allUsers);
+            model.addAttribute("subProjectUsers", subProjectUsers);
+            model.addAttribute("subProjectId", subProjectId);
             return "subProjectDetails";
         } else {
             return "redirect:/";
@@ -91,7 +97,6 @@ public class SubProjectController {
         User user = (User) session.getAttribute("user");
         if (user != null && "pjManager".equals(user.getRole())) {
             int projectId = subProjectService.findSubProjectById(id).getProjectId();
-            SubProject subProject = subProjectService.findSubProjectById(id);
             subProjectService.deleteSubProject(id);
             return "redirect:/projectDetails/" + projectId;
         } else {

@@ -15,8 +15,13 @@
         <label for="subProject_name">SubProject name:</label>
         <input id="subProject_name" type="text" name="subProjectName" th:value="${subProject.subProjectName}">
 
-        <label for="Status">Status:</label>
-        <input id="Status" type="text" name="status" th:value="${subProject.status}">
+        <label for="SubProject_status">Status:</label>
+        <select id="SubProject_status" name="status" th:value="${subProject.status}" required>
+            <option value="Not Started" th:selected="${subProject.status == 'Not Started'}">Not Started</option>
+            <option value="In Progress" th:selected="${subProject.status == 'In Progress'}">In Progress</option>
+            <option value="Completed" th:selected="${subProject.status == 'Completed'}">Completed</option>
+        </select>
+
 
         <button class="btn" type="submit">Save</button>
 

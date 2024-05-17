@@ -3,7 +3,6 @@ package com.example.eksamensprojekt.Controller;
 import com.example.eksamensprojekt.Model.User;
 import com.example.eksamensprojekt.Service.UserService;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginPost(@RequestParam String username, @RequestParam String password, HttpSession session, Model model  ) {
+    public String loginPost(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
         try {
             User user = userService.checkLogin(username, password);
             int userId = user.getUser_ID();
@@ -57,7 +56,7 @@ public class UserController {
     }
 
     @GetMapping("/admin")
-    public String admin(HttpSession session, Model model) {
+    public String admin(HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user != null && user.getRole().equals("admin")) {
             return "admin";
@@ -67,7 +66,7 @@ public class UserController {
     }
 
     @GetMapping("/employee")
-    public String employee(HttpSession session, Model model) {
+    public String employee(HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user != null && user.getRole().equals("employee")) {
             return "employee";
@@ -88,24 +87,38 @@ public class UserController {
     }
 
     @GetMapping("/createUser")
-    public String createUser(Model model) {
-        User defaultUser = new User();
-        model.addAttribute("user", defaultUser);
-        return "createUser";
-
+    public String createUser(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user != null && "admin".equals(user.getRole())) {
+            User defaultUser = new User();
+            model.addAttribute("user", defaultUser);
+            return "createUser";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/createUser")
-    public String postCreateUser(@ModelAttribute User user) throws SQLException {
-        userService.createUser(user);
-        return "redirect:/admin";
+    public String postCreateUser(@ModelAttribute User user, HttpSession session) throws SQLException {
+        User currentUser = (User) session.getAttribute("user");
+        if (currentUser != null && "admin".equals(currentUser.getRole())) {
+            userService.createUser(user);
+            return "redirect:/admin";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/showUsers")
-    public String showUsers(Model model) throws SQLException {
-        List<User> userList = userService.showAllUsers();
-        model.addAttribute("userList", userList);
-        return "showUsers";
+    public String showUsers(Model model, HttpSession session) throws SQLException {
+        User user = (User) session.getAttribute("user");
+        if (user != null && "admin".equals(user.getRole())) {
+            List<User> userList = userService.showAllUsers();
+            model.addAttribute("userList", userList);
+            return "showUsers";
+        } else {
+            return "redirect:/";
+        }
     }
 }
 
