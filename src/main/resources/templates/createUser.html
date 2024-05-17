@@ -52,28 +52,28 @@
     <form method="post" th:action="@{/createUser}">
         <h2>Create user</h2>
         <div class="input-box">
-            <label for="username">Username</label>
+            <label for="username">Brugernavn</label>
             <input type="text" id="username" name="username" placeholder="Username" required>
         </div>
         <div class="input-box">
-            <label for="password">Password</label>
+            <label for="password">Adgangskode</label>
             <input type="password" id="password" name="password" placeholder="Password" required>
         </div>
 
         <div class="role-box">
-            <h3>Role</h3>
+            <h3>Rolle</h3>
             <div class="role-options">
                 <input type="radio" id="admin" name="role" value="admin">
                 <label for="admin">Admin</label>
 
-                <input type="radio" id="employee" name="role" value="employee">
-                <label for="employee">Employee</label>
+                <input type="radio" id="employee" name="role" value="Medarbejder">
+                <label for="employee">Medarbejder</label>
 
-                <input type="radio" id="projectManager" name="role" value="projectManager">
-                <label for="projectManager">Project Manager</label>
+                <input type="radio" id="projectManager" name="role" value="Projektleder">
+                <label for="projectManager">Projekt leder</label>
             </div>
         </div>
-        <input type="submit" value="Create user" placeholder="Create user"/>
+        <input type="submit" value="Opret bruger" placeholder="Opret bruger"/>
     </form>
 </div>
 </body>

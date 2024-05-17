@@ -11,30 +11,30 @@
 
 <div>
     <form method="post" th:action="@{/editTask/{taskId}(taskId=${taskId})}">
-        <label for="task_name">Task name:</label>
+        <label for="task_name">Opgave navn:</label>
         <input id="task_name" type="text" th:name="taskName" th:value="${task.taskName}" required>
 
-        <label for="task_start_date">Start Date</label>
+        <label for="task_start_date">Start dato</label>
         <input id="task_start_date" type="date" th:field="*{task.startDate}" min="2000-01-01" max="3000-12-31" required>
 
-        <label for="task_end_date">End Date</label>
+        <label for="task_end_date">Slut dato</label>
         <input id="task_end_date" type="date" th:field="*{task.endDate}" min="2000-01-01" max="3000-12-31" required>
 
 
-        <label for="task_estimated_time">Estimated Time (hours)</label>
+        <label for="task_estimated_time">Estimeret tid (timer)</label>
         <input id="task_estimated_time" type="number" th:name="estimatedTime" th:field="${task.estTime}" required>
 
         <label for="task_status">Status</label>
         <select id="task_status" name="status" th:field="${task.status}" required>
-            <option value="Not Started">Not Started</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Completed">Completed</option>
+            <option value="Ikke startet">Ikke startet</option>
+            <option value="I gang">I gang</option>
+            <option value=">Færdig">Færdig</option>
         </select>
 
-        <button class="btn" type="submit">Save</button>
+        <button class="btn" type="submit">Gem</button>
 
         <a th:href="@{/subProjectDetails/{subProjectId}(subProjectId=${task.subprojectId})}">
-            <button type="button" class="btn">Return to tasks</button>
+            <button type="button" class="btn">Tilbage til opgaver</button>
         </a>
     </form>
 </div>

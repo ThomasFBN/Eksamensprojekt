@@ -50,21 +50,21 @@
 </div>
 <div class="center-box + create-box">
     <form method="post" th:action="@{'/createProject'}">
-        <h2>Create Project</h2>
+        <h2>Opret projekt</h2>
         <div class="input-box">
-            <label for="name">Name</label>
+            <label for="name">Navn</label>
             <input type="text" id="name" name="project" placeholder="Name" required>
         </div>
         <input type="hidden" id="userId" name="userId" th:value="${userId}">
         <div class="input-box">
             <label for="status">Status</label>
             <select id="status" name="status" required>
-                <option value="Not Started">Not Started</option>
-                <option value="In Progress">In Progress</option>
-                <option value=">Completed">Completed</option>
+                <option value="Ikke startet">Ikke startet</option>
+                <option value="I gang">I gang</option>
+                <option value=">Færdig">Færdig</option>
             </select>
         </div>
-        <input type="submit" value="Create Project" placeholder="Create Project"/>
+        <input type="submit" value="Opret projekt" placeholder="Opret projekt"/>
     </form>
 </div>
 

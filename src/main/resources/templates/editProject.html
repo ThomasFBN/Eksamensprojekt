@@ -13,20 +13,20 @@
 <div>
     <form method="post" th:action="@{/editProject/{projectId}(projectId=${project.project_id})}">
 
-        <label for="projectName">Project name:</label>
+        <label for="projectName">Projekt navn:</label>
         <input id="projectName" type="text" name="projectName" th:value="${project.projectName}">
 
         <label for="Project_status">Status:</label>
         <select id="Project_status" name="status" th:value="${project.status}" required>
-            <option value="Not Started" th:selected="${project.status == 'Not Started'}">Not Started</option>
-            <option value="In Progress" th:selected="${project.status == 'In Progress'}">In Progress</option>
-            <option value="Completed" th:selected="${project.status == 'Completed'}">Completed</option>
+            <option value="Ikke startet" th:selected="${project.status == 'Ikke startet'}">Ikke startet</option>
+            <option value="I gang" th:selected="${project.status == 'I gang'}">I gang</option>
+            <option value="Færdig" th:selected="${project.status == 'Færdig'}">Færdig</option>
         </select>
 
-        <button class="btn" type="submit">Save</button>
+        <button class="btn" type="submit">Gem</button>
 
         <a th:href="@{/showProjects/{user_id}(user_id=${userId})}">
-            <button type="button" class="btn">Return to projects</button>
+            <button type="button" class="btn">Tilbage til projekter</button>
         </a>
 
     </form>

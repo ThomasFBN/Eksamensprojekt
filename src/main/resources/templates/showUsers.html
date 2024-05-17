@@ -11,9 +11,9 @@
 <h2>Users:</h2>
 <table class="showAll-table">
     <tr>
-        <th>Username</th>
-        <th>Password</th>
-        <th>Role</th>
+        <th>Brugernavn</th>
+        <th>Adgangskode</th>
+        <th>Rolle</th>
     </tr>
     <tr th:each="user : ${userList}" class="user-row">
         <td>
@@ -35,10 +35,10 @@
     <tr>
         <td class="show-all-box">
             <a href="/createUser" th:href="@{/createUser}">
-                <button>Create New User</button>
+                <button>Opret ny bruger</button>
             </a>
             <a href="/admin" th:href="@{/admin}">
-                <button>Back to admin page</button>
+                <button>Tilbage til admin side</button>
             </a>
         </td>
     </tr>

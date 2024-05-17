@@ -50,20 +50,20 @@
 </div>
 <div class="center-box + create-box">
     <form method="post" th:action="@{'/projectDetails/' + ${projectId} + '/createSubProject'}">
-    <h2>Create SubProject</h2>
+    <h2>Opret underprojekt</h2>
         <div class="input-box">
-            <label for="name">Name</label>
+            <label for="name">Navn</label>
         <input type="text" id="name" name="subProjectName" placeholder="Name" required>
         </div>
         <div class="input-box">
             <label for="status">Status</label>
             <select id="status" name="status" required>
-                <option value="1">Not Started</option>
-                <option value="2">In Progress</option>
-                <option value="3">Completed</option>
+                <option value="Ikke startet">Ikke startet</option>
+                <option value="I gang">I gang</option>
+                <option value=">Færdig">Færdig</option>
             </select>
         </div>
-        <input type="submit" value="Create Subproject" placeholder="Create SubProject"/>
+        <input type="submit" value="Opret underprojekt" placeholder="Opret underprojekt"/>
     </form>
 </div>
 

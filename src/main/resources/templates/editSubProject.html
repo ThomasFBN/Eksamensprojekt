@@ -12,21 +12,21 @@
 
 <div>
     <form method="post" th:action="@{/editSubProject/{subProjectId}(subProjectId=${subProjectId})}">
-        <label for="subProject_name">SubProject name:</label>
+        <label for="subProject_name">Underprojekt navn:</label>
         <input id="subProject_name" type="text" name="subProjectName" th:value="${subProject.subProjectName}">
 
         <label for="SubProject_status">Status:</label>
         <select id="SubProject_status" name="status" th:value="${subProject.status}" required>
-            <option value="Not Started" th:selected="${subProject.status == 'Not Started'}">Not Started</option>
-            <option value="In Progress" th:selected="${subProject.status == 'In Progress'}">In Progress</option>
-            <option value="Completed" th:selected="${subProject.status == 'Completed'}">Completed</option>
+            <option value="Ikke startet" th:selected="${subProject.status == 'Ikke startet'}">Ikke startet</option>
+            <option value="I gang" th:selected="${subProject.status == 'I gang'}">I gang</option>
+            <option value="Færdig" th:selected="${subProject.status == 'Færdig'}">Færdig</option>
         </select>
 
 
-        <button class="btn" type="submit">Save</button>
+        <button class="btn" type="submit">Gem</button>
 
         <a th:href="@{/projectDetails/{projectId}(projectId=${subProject.projectId})}">
-            <button type="button" class="btn">Return to SubProjects</button>
+            <button type="button" class="btn">Tilbage til underprojekter</button>
         </a>
     </form>
 </div>

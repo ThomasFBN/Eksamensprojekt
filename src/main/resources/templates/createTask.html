@@ -53,30 +53,30 @@
     <form method="post" th:action="@{'/subProjectDetails/' + ${subProjectId} + '/createTask'}">
         <h2>Create Task</h2>
         <div class="input-box">
-            <label for="name">Task Name</label>
+            <label for="name">Opgave navn</label>
             <input type="text" id="name" name="taskName" placeholder="Task Name" required>
         </div>
         <div class="input-box">
-            <label for="startDate">Start Date</label>
+            <label for="startDate">Start dato</label>
             <input type="date" id="startDate" name="startDate" required>
         </div>
         <div class="input-box">
-            <label for="endDate">End Date</label>
+            <label for="endDate">Slut dato</label>
             <input type="date" id="endDate" name="endDate" required>
         </div>
         <div class="input-box">
-            <label for="estTime">Estimated Time (hours)</label>
+            <label for="estTime">Estimeret tid (timer)</label>
             <input type="number" id="estTime" name="estTime" placeholder="Estimated Time" required>
         </div>
         <div class="input-box">
             <label for="status">Status</label>
             <select id="status" name="status" required>
-                <option value="Not Started">Not Started</option>
-                <option value="In Progress">In Progress</option>
-                <option value=">Completed">Completed</option>
+                <option value="Ikke startet">Ikke startet</option>
+                <option value="I gang">I gang</option>
+                <option value=">Færdig">Færdig</option>
             </select>
         </div>
-        <input type="submit" value="Create Task"/>
+        <input type="submit" value="Opret opgave"/>
     </form>
 </div>
 

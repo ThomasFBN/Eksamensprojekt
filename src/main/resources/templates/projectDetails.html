@@ -64,15 +64,15 @@
 <div class="background">
 </div>
 <div class="center-box" id="buttons_details">
-    <button onclick="showSubProjects()" class="bn37 bn3637">See all subProjects</button>
+    <button onclick="showSubProjects()" class="bn37 bn3637">Se alle underprojekter</button>
 </div>
 <div class="center-box" id="table_details">
     <table class="table" id="table_subPj">
         <thead>
         <tr>
-            <td>SubProject Name</td>
+            <td>Underprojekt navn </td>
             <td>Status</td>
-            <td>Delete/Edit SubProject</td>
+            <td>Slet/Ret underprojekt</td>
         </tr>
         </thead>
         <tbody>
@@ -86,10 +86,10 @@
             <td>
                 <div class="edit-delete-buttons">
                     <form th:action="@{'/deleteSubProject/' + ${subProject.subProjectId}}" method="post">
-                        <button type="submit" class="bn37 bn3637">Delete</button>
+                        <button type="submit" class="bn37 bn3637">Slet</button>
                     </form>
                     <a th:href="@{'/editSubProject/' + ${subProject.subProjectId}}">
-                        <button class="bn37 bn3637">Edit</button>
+                        <button class="bn37 bn3637">Ret</button>
                     </a>
                 </div>
             </td>
@@ -97,7 +97,7 @@
         <tr>
             <td>
                 <a th:href="@{'/projectDetails/' + ${projectId} + '/createSubProject'}">
-                    <button class="bn37 bn3637">Add</button>
+                    <button class="bn37 bn3637">Tilføj</button>
                 </a>
             </td>
         </tr>

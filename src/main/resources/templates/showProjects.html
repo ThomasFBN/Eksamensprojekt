@@ -63,9 +63,9 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Project Name</th>
+            <th>Projekt navn</th>
             <th>Status</th>
-            <th>Edit/Delete</th>
+            <th>Ret/Slet</th>
         </tr>
         </thead>
         <tbody>
@@ -79,10 +79,10 @@
             <td>
                 <div class="edit-delete-buttons">
                     <a th:href="@{'/editProject/' + ${project.project_id}}">
-                        <button class="bn37 bn3637">Edit</button>
+                        <button class="bn37 bn3637">Ret</button>
                     </a>
                     <form th:action="@{'/deleteProject/' + ${project.project_id}}" method="post">
-                        <button type="submit" class="bn37 bn3637">Delete</button>
+                        <button type="submit" class="bn37 bn3637">Slet</button>
                     </form>
                 </div>
             </td>

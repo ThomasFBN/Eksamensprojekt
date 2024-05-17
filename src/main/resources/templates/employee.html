@@ -58,22 +58,22 @@
 </header>
 <body>
 <div class="background"></div>
-<h1>Signed in as Employee </h1>
+<h1>Logget ind som medarbejder </h1>
 <div class="center-box" id="buttons_details">
-    <button onclick="showTasks()" class="bn37 bn3637">See all your tasks</button>
-    <button onclick="showCompletedTasks()" class="bn37 bn3637">Show Completed Tasks</button>
+    <button onclick="showTasks()" class="bn37 bn3637">Se alle dine opgaver</button>
+    <button onclick="showCompletedTasks()" class="bn37 bn3637">Se dine færdige opgaver</button>
 </div>
 <div class="center-box" id="table_details">
     <table class="table" id="table_tasks" style="display: none;">
         <thead>
         <tr>
-            <th>Task Name</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Estimated Time</th>
+            <th>Opgave Navn</th>
+            <th>Start dato</th>
+            <th>Slut dato</th>
+            <th>Estimeret tid</th>
             <th>Status</th>
-            <th>Edit task</th>
-            <th>Mark as completed</th>
+            <th>Ændre opgave</th>
+            <th>Marker som færdig</th>
         </tr>
         </thead>
         <tbody>
@@ -85,12 +85,12 @@
             <td th:text="${task.status}"></td>
             <td>
                 <a th:href="@{'/editTask/' + ${task.taskId}}">
-                    <button class="bn37 bn3637">Edit</button>
+                    <button class="bn37 bn3637">Ret</button>
                 </a>
             </td>
             <td>
                 <form th:action="@{'/employee/' + ${userId} + '/complete/' + ${task.taskId}}" method="post">
-                    <button type="submit">Mark as Completed</button>
+                    <button type="submit">Marker som færdig</button>
                 </form>
             </td>
         </tr>
@@ -99,12 +99,12 @@
     <table class="table" id="table_completed_tasks" style="display: none;">
         <thead>
         <tr>
-            <th>Task Name</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-            <th>Estimated Time</th>
+            <th>Opgave Navn</th>
+            <th>Start dato</th>
+            <th>Slut dato</th>
+            <th>Estimeret tid</th>
             <th>Status</th>
-            <th>Edit task</th>
+            <th>Ændre opgave</th>
         </tr>
         </thead>
         <tbody>
@@ -116,7 +116,7 @@
             <td th:text="${task.status}"></td>
             <td>
                 <a th:href="@{'/editTask/' + ${task.taskId}}">
-                    <button class="bn37 bn3637">Edit</button>
+                    <button class="bn37 bn3637">Ret</button>
                 </a>
             </td>
         </tr>

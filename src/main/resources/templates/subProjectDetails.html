@@ -71,21 +71,21 @@
 <div class="background">
 </div>
 <div class="center-box" id="buttons_details">
-    <button onclick="showTasks()" class="bn37 bn3637">See all tasks</button>
-    <button onclick="showUsers()" class="bn37 bn3637">See all users</button>
+    <button onclick="showTasks()" class="bn37 bn3637">Se alle opgaver</button>
+    <button onclick="showUsers()" class="bn37 bn3637">Se alle brugere</button>
 </div>
 <div class="center-box" id="table_details">
     <table class="table" id="table_tasks" style="display: none;">
         <thead>
         <tr>
-            <td>Task Name</td>
-            <td>Start Date</td>
-            <td>End Date</td>
-            <td>Estimated Time</td>
+            <td>Opgave navn</td>
+            <td>Start dato</td>
+            <td>Slut dato</td>
+            <td>Estimeret tid</td>
             <td>Status</td>
-            <td>Assigned User</td>
-            <td>Assign User</td>
-            <td>Delete/Edit Task</td>
+            <td>Tildelt bruger</td>
+            <td>Tildel til bruger</td>
+            <td>Slet/ret opgave</td>
 
         </tr>
         </thead>
@@ -115,16 +115,16 @@
                     <select name="userId" required>
                         <option th:each="user : ${users}" th:value="${user.user_ID}" th:text="${user.username}"></option>
                     </select>
-                    <button type="submit" class="bn37 bn3637">Assign</button>
+                    <button type="submit" class="bn37 bn3637">Tildel</button>
                 </form>
             </td>
             <td>
                 <div class="edit-delete-buttons">
                     <form th:action="@{'/deleteTask/' + ${task.taskId}}" method="post">
-                        <button type="submit" class="bn37 bn3637">Delete</button>
+                        <button type="submit" class="bn37 bn3637">Slet</button>
                     </form>
                     <a th:href="@{'/editTask/' + ${task.taskId}}">
-                        <button class="bn37 bn3637">Edit</button>
+                        <button class="bn37 bn3637">Ret</button>
                     </a>
                 </div>
             </td>
@@ -133,7 +133,7 @@
         <tr>
             <td>
                 <a th:href="@{'/subProjectDetails/' + ${subProjectId} + '/createTask'}">
-                    <button class="bn37 bn3637">Add</button>
+                    <button class="bn37 bn3637">Tilføj</button>
                 </a>
             </td>
         </tr>
@@ -142,7 +142,7 @@
     <table class="table" id="table_users" style="display: none;">
         <thead>
         <tr>
-            <td>Username</td>
+            <td>Brugernavn</td>
         </tr>
         </thead>
         <tbody>

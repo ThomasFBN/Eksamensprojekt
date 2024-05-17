@@ -45,7 +45,7 @@ public class TaskRepository {
     public List<Task> showAllTasks(int userId) throws SQLException {
         List<Task> tasks = new ArrayList<>();
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
-        String SQL = "SELECT * FROM TASKS WHERE USER_ID = ? AND STATUS <> 'Completed'";
+        String SQL = "SELECT * FROM TASKS WHERE USER_ID = ? AND STATUS <> 'Færdig'";
         try (PreparedStatement ps = connection.prepareStatement(SQL)) {
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
@@ -67,7 +67,7 @@ public class TaskRepository {
     public List<Task> showCompletedTasks(int userId) throws SQLException {
         List<Task> completedTasks = new ArrayList<>();
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
-        String SQL = "SELECT * FROM TASKS WHERE USER_ID = ? AND STATUS = 'Completed'";
+        String SQL = "SELECT * FROM TASKS WHERE USER_ID = ? AND STATUS = 'Færdig'";
         try (PreparedStatement ps = connection.prepareStatement(SQL)) {
             ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
@@ -150,7 +150,7 @@ public class TaskRepository {
 
     public void markTaskAsCompleted(int taskId) throws SQLException {
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
-        String SQL = "UPDATE TASKS SET STATUS = 'Completed' WHERE TASK_ID = ?";
+        String SQL = "UPDATE TASKS SET STATUS = 'Færdig' WHERE TASK_ID = ?";
 
         try (PreparedStatement ps = connection.prepareStatement(SQL)) {
             ps.setInt(1, taskId);
