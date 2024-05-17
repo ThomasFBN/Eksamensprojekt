@@ -35,25 +35,31 @@ public class UserController {
     public String loginPost(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
         try {
             User user = userService.checkLogin(username, password);
+            if (user == null) {
+                model.addAttribute("error", "invalid");
+                return "home";
+            }
             int userId = user.getUser_ID();
-            if (user != null && user.getRole().equals("admin")) {
+            if (user.getRole().equals("admin")) {
                 session.setAttribute("user", user);
                 return "redirect:/admin";
-            } else if (user != null && user.getRole().equals("employee")) {
+            } else if (user.getRole().equals("employee")) {
                 session.setAttribute("user", user);
                 return "redirect:/employee/" + userId;
-            } else if (user != null && user.getRole().equals("pjManager")) {
+            } else if (user.getRole().equals("pjManager")) {
                 session.setAttribute("user", user);
                 return "redirect:/projectManager";
             } else {
                 model.addAttribute("error", "invalid");
                 return "home";
             }
-        } catch (
-                SQLException e) {
-            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            model.addAttribute("error", "An error occurred. Please try again later.");
+            return "home";
         }
     }
+
 
     @GetMapping("/admin")
     public String admin(HttpSession session) {
