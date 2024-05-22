@@ -7,31 +7,32 @@
 </head>
 
 <body>
-
+<div class="background"></div>
 <h1 align="center">Edit Project</h1>
 
 <div>
-    <form method="post" th:action="@{/editProject/{projectId}(projectId=${project.project_id})}">
+    <div class="center-box create-box">
+        <form method="post" th:action="@{/editProject/{projectId}(projectId=${project.project_id})}">
 
-        <label for="projectName">Projekt navn:</label>
-        <input id="projectName" type="text" name="projectName" th:value="${project.projectName}">
+            <label for="name">Projekt navn:</label>
+            <input id="name" type="text" name="projectName" th:value="${project.projectName}">
 
-        <label for="Project_status">Status:</label>
-        <select id="Project_status" name="status" th:value="${project.status}" required>
-            <option value="Ikke startet" th:selected="${project.status == 'Ikke startet'}">Ikke startet</option>
-            <option value="I gang" th:selected="${project.status == 'I gang'}">I gang</option>
-            <option value="Færdig" th:selected="${project.status == 'Færdig'}">Færdig</option>
-        </select>
+            <label for="status">Status:</label>
+            <select id="status" name="status" th:value="${project.status}" required>
+                <option value="Ikke startet" th:selected="${project.status == 'Ikke startet'}">Ikke startet</option>
+                <option value="I gang" th:selected="${project.status == 'I gang'}">I gang</option>
+                <option value="Færdig" th:selected="${project.status == 'Færdig'}">Færdig</option>
+            </select>
 
-        <button class="btn" type="submit">Gem</button>
+            <button class="bn37 bn3637" type="submit">Gem</button>
 
-        <a th:href="@{/showProjects/{user_id}(user_id=${userId})}">
-            <button type="button" class="btn">Tilbage til projekter</button>
-        </a>
+            <a th:href="@{/showProjects/{user_id}(user_id=${userId})}">
+                <button type="button" class="bn37 bn3637">Tilbage til projekter</button>
+            </a>
 
-    </form>
+        </form>
 
+    </div>
 </div>
-
 </body>
 </html>

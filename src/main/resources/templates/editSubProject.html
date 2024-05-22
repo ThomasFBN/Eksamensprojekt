@@ -3,30 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit SubProject</title>
-    <link th:href="@{/edit.css}" rel="stylesheet">
+    <link th:href="@{/projectManager.css}" rel="stylesheet">
 </head>
 
 <body>
-
+<div class="background">
+</div>
 <h1 align="center">Edit SubProject</h1>
 
-<div>
+<div class="center-box create-box">
     <form method="post" th:action="@{/editSubProject/{subProjectId}(subProjectId=${subProjectId})}">
-        <label for="subProject_name">Underprojekt navn:</label>
-        <input id="subProject_name" type="text" name="subProjectName" th:value="${subProject.subProjectName}">
-
-        <label for="SubProject_status">Status:</label>
-        <select id="SubProject_status" name="status" th:value="${subProject.status}" required>
+        <div class="input-box">
+            <label for="name">Underprojekt navn:</label>
+            <input id="name" type="text" name="subProjectName" th:value="${subProject.subProjectName}">
+        </div>
+        <label for="status">Status:</label>
+        <select id="status" name="status" th:value="${subProject.status}" required>
             <option value="Ikke startet" th:selected="${subProject.status == 'Ikke startet'}">Ikke startet</option>
             <option value="I gang" th:selected="${subProject.status == 'I gang'}">I gang</option>
             <option value="Færdig" th:selected="${subProject.status == 'Færdig'}">Færdig</option>
         </select>
 
-
-        <button class="btn" type="submit">Gem</button>
+        <button class="bn3637 bn37" type="submit">Gem</button>
 
         <a th:href="@{/projectDetails/{projectId}(projectId=${subProject.projectId})}">
-            <button type="button" class="btn">Tilbage til underprojekter</button>
+            <button type="button" class="bn37 bn3637">Tilbage til underprojekter</button>
         </a>
     </form>
 </div>

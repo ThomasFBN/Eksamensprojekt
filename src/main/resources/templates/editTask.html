@@ -6,37 +6,40 @@
     <link th:href="@{/edit.css}" rel="stylesheet">
 </head>
 <body>
-
+<div class="background"></div>
 <h1 align="center">Edit Task</h1>
 
 <div>
-    <form method="post" th:action="@{/editTask/{taskId}(taskId=${taskId})}">
-        <label for="task_name">Opgave navn:</label>
-        <input id="task_name" type="text" th:name="taskName" th:value="${task.taskName}" required>
+    <div class="center-box create-box">
+        <form method="post" th:action="@{/editTask/{taskId}(taskId=${taskId})}">
+            <label for="name">Opgave navn:</label>
+            <input id="name" type="text" th:name="taskName" th:value="${task.taskName}" required>
 
-        <label for="task_start_date">Start dato</label>
-        <input id="task_start_date" type="date" th:field="*{task.startDate}" min="2000-01-01" max="3000-12-31" required>
+            <label for="task_start_date">Start dato</label>
+            <input id="task_start_date" type="date" th:field="*{task.startDate}" min="2000-01-01" max="3000-12-31"
+                   required>
 
-        <label for="task_end_date">Slut dato</label>
-        <input id="task_end_date" type="date" th:field="*{task.endDate}" min="2000-01-01" max="3000-12-31" required>
+            <label for="task_end_date">Slut dato</label>
+            <input id="task_end_date" type="date" th:field="*{task.endDate}" min="2000-01-01" max="3000-12-31" required>
 
 
-        <label for="task_estimated_time">Estimeret tid (timer)</label>
-        <input id="task_estimated_time" type="number" th:name="estimatedTime" th:field="${task.estTime}" required>
+            <label for="task_estimated_time">Estimeret tid (timer)</label>
+            <input id="task_estimated_time" type="number" th:name="estimatedTime" th:field="${task.estTime}" required>
 
-        <label for="task_status">Status</label>
-        <select id="task_status" name="status" th:field="${task.status}" required>
-            <option value="Ikke startet">Ikke startet</option>
-            <option value="I gang">I gang</option>
-            <option value=">Færdig">Færdig</option>
-        </select>
+            <label for="status">Status</label>
+            <select id="status" name="status" th:field="${task.status}" required>
+                <option value="Ikke startet">Ikke startet</option>
+                <option value="I gang">I gang</option>
+                <option value=">Færdig">Færdig</option>
+            </select>
 
-        <button class="btn" type="submit">Gem</button>
+            <button class="bn3637 bn37" type="submit">Gem</button>
 
-        <a th:href="@{/subProjectDetails/{subProjectId}(subProjectId=${task.subprojectId})}">
-            <button type="button" class="btn">Tilbage til opgaver</button>
-        </a>
-    </form>
+            <a th:href="@{/subProjectDetails/{subProjectId}(subProjectId=${task.subprojectId})}">
+                <button type="button" class="bn37 bn3637">Tilbage til opgaver</button>
+            </a>
+        </form>
+    </div>
 </div>
 
 </body>
