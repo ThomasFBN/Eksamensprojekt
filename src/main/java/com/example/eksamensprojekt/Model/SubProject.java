@@ -1,7 +1,6 @@
 package com.example.eksamensprojekt.Model;
 
 
-
 public class SubProject {
     private int subProjectId;
     private String subProjectName;

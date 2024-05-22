@@ -115,6 +115,7 @@ public class ProjectRepository {
 
 
     }
+
     public void editProject(Project project, int projectId) throws SQLException {
         Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
         String SQL = "UPDATE Projects SET projectName=?, status=? WHERE project_id=?";

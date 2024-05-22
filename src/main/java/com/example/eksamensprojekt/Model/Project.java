@@ -46,6 +46,7 @@ public class Project {
     public void setStatus(String status) {
         this.status = status;
     }
+
     public int getUser_id() {
         return user_id;
     }
