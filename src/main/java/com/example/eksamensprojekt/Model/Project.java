@@ -18,6 +18,11 @@ public class Project {
     public Project(String projectName) {
         this.projectName = projectName;
     }
+    public Project(String projectName, String status) {
+        this.projectName = projectName;
+        this.status = status;
+
+    }
 
     public Project() {
     }

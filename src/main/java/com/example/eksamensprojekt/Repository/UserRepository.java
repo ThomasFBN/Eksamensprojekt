@@ -68,7 +68,7 @@ public class UserRepository {
 
     public List<User> showAllUsers() throws SQLException {
         List<User> userList = new ArrayList<>();
-        Connection connection = DriverManager.getConnection(db_url, db_username, db_password);
+        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
         String SQL = "SELECT * FROM Users";
         try (PreparedStatement ps = connection.prepareStatement(SQL)) {
             ResultSet rs = ps.executeQuery();

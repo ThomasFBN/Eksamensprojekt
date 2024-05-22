@@ -159,7 +159,7 @@ public class TaskRepository {
     }
 
     public void assignUserToTask(int taskId, int userId) throws SQLException {
-        Connection connection = DriverManager.getConnection(db_url, db_username, db_password);
+        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
         String SQL = "UPDATE tasks SET user_id = ? WHERE task_id = ?";
         try (PreparedStatement ps = connection.prepareStatement(SQL)) {
             ps.setInt(1, userId);
