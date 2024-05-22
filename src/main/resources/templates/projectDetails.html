@@ -10,10 +10,19 @@
             document.getElementById("table_subPj").style.display = "block";
         }
 
-        /*function showTable(id_1, id_2) {
-           document.getElementById(id_1).style.display = "block";
-           document.getElementById(id_2).style.display = "none";
-       } */
+        function deleteFunction(event) {
+            event.preventDefault();
+
+            var confirmation = confirm("Er du sikker på at du vil slette det?");
+
+            if (confirmation) {
+
+                event.target.submit();
+            } else {
+
+                console.log("Deletion canceled.");
+            }
+        }
 
     </script>
     <meta charset="UTF-8">
@@ -70,7 +79,7 @@
     <table class="table" id="table_subPj">
         <thead>
         <tr>
-            <td>Underprojekt navn </td>
+            <td>Underprojekt navn</td>
             <td>Status</td>
             <td>Slet/Ret underprojekt</td>
         </tr>
@@ -85,7 +94,8 @@
             <td th:text="${subProject.status}"></td>
             <td>
                 <div class="edit-delete-buttons">
-                    <form th:action="@{'/deleteSubProject/' + ${subProject.subProjectId}}" method="post">
+                    <form th:action="@{'/deleteSubProject/' + ${subProject.subProjectId}}" method="post"
+                          onsubmit="deleteFunction(event)">
                         <button type="submit" class="bn37 bn3637">Slet</button>
                     </form>
                     <a th:href="@{'/editSubProject/' + ${subProject.subProjectId}}">

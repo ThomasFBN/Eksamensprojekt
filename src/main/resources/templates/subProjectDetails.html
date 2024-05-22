@@ -12,16 +12,21 @@
             document.getElementById("table_tasks").style.display = "none";
         }
 
-            function deleteFunction(event) {
+        function deleteFunction(event) {
             event.preventDefault();
-            var confirmation = confirm("Are you sure you want to delete?");
+
+            var confirmation = confirm("Er du sikker på at du vil slette det?");
 
             if (confirmation) {
-            window.location.href = event.currentTarget.getAttribute('href');
-        } else {
-            console.log("Deletion canceled.");
-        }
+
+                event.target.submit();
+            } else {
+
+                console.log("Deletion canceled.");
             }
+        }
+    </script>
+    }
     </script>
     <meta charset="UTF-8">
     <title>ProjectDetails</title>
@@ -113,14 +118,15 @@
                 <form th:action="@{'/assignUserToTask'}" method="post">
                     <input type="hidden" name="taskId" th:value="${task.taskId}">
                     <select name="userId" required>
-                        <option th:each="user : ${users}" th:value="${user.user_ID}" th:text="${user.username}"></option>
+                        <option th:each="user : ${users}" th:value="${user.user_ID}"
+                                th:text="${user.username}"></option>
                     </select>
                     <button type="submit" class="bn37 bn3637">Tildel</button>
                 </form>
             </td>
             <td>
                 <div class="edit-delete-buttons">
-                    <form th:action="@{'/deleteTask/' + ${task.taskId}}" method="post">
+                    <form th:action="@{'/deleteTask/' + ${task.taskId}}" method="post" onsubmit="deleteFunction(event)">
                         <button type="submit" class="bn37 bn3637">Slet</button>
                     </form>
                     <a th:href="@{'/editTask/' + ${task.taskId}}">
