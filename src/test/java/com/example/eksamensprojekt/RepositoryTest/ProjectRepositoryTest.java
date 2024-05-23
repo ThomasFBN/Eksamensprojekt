@@ -2,6 +2,7 @@ package com.example.eksamensprojekt.RepositoryTest;
 
 import com.example.eksamensprojekt.Model.Project;
 import com.example.eksamensprojekt.Model.SubProject;
+import com.example.eksamensprojekt.Model.Task;
 import com.example.eksamensprojekt.Repository.ProjectRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,19 +51,20 @@ public class ProjectRepositoryTest {
         int projectId = 1;
         projectRepository.editProject(project, projectId);
     }
-
-    @Test
-    void deleteProject() {
-        int projectId = 1;
-        assertDoesNotThrow(() -> projectRepository.deleteProject(projectId));
+@Test
+    void deleteProject() throws SQLException {
+        projectRepository.deleteProject(1);
+        Project deletedProject = projectRepository.findProjectById(1);
+        assertNull(deletedProject);
     }
-/*
+
     @Test
     void findProjectById() throws SQLException {
-        int projectId = 1;
-        Project project = projectRepository.findProjectById(projectId);
+        Project project = projectRepository.findProjectById(1);
         assertNotNull(project);
+        assertEquals(1, project.getProject_id());
+
     }
 
- */
+
 }
