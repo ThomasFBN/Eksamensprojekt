@@ -42,6 +42,7 @@ public class Project {
 
     public void setProjectName(String projectName) {
         this.projectName = projectName;
+        this.status = status;
     }
 
     public void setProject_id(int project_id) {
