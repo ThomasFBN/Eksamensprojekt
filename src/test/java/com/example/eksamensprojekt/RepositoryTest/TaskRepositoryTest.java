@@ -31,7 +31,7 @@ public class TaskRepositoryTest {
 
     @Test
     void showAllTasks() throws SQLException {
-        List<Task> tasks = taskRepository.showAllTasks(3);
+        List<Task> tasks = taskRepository.showAllTasks(2);
         assertFalse(tasks.isEmpty());
     }
 
