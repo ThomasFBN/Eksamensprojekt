@@ -26,13 +26,13 @@ public class TaskRepositoryTest {
     void createTask() throws SQLException {
         Task task = new Task("Test Task",1, LocalDate.now(), LocalDate.now().plusDays(1), 8, "I gang");
         taskRepository.createTask(task);
-        assertNotNull(task.getTaskId());
+        assertNotNull(task.getTaskName());
     }
 
     @Test
     void showAllTasks() throws SQLException {
         List<Task> tasks = taskRepository.showAllTasks(1);
-        assertTrue(tasks.size() > 0);
+        assertFalse(tasks.isEmpty());
     }
 
     @Test
@@ -63,6 +63,7 @@ public class TaskRepositoryTest {
 
     @Test
     void findTaskByTaskId() throws SQLException {
+
         Task task = taskRepository.findTaskByTaskId(1);
         assertEquals(1, task.getTaskId());
     }

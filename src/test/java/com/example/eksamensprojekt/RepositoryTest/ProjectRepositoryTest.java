@@ -22,6 +22,13 @@ public class ProjectRepositoryTest {
 
     @Autowired
     private ProjectRepository projectRepository;
+
+    @Test
+    void findProjectById() throws SQLException {
+        Project project = projectRepository.findProjectById(2);
+        assertEquals(2, project.getProject_id());
+
+    }
     @Test
     void createProject() throws SQLException {
         Project project = new Project("Test Project", "i gang");
@@ -58,13 +65,6 @@ public class ProjectRepositoryTest {
         assertNull(deletedProject);
     }
 
-    @Test
-    void findProjectById() throws SQLException {
-        Project project = projectRepository.findProjectById(1);
-        assertNotNull(project);
-        assertEquals(1, project.getProject_id());
-
-    }
 
 
 }
