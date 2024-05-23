@@ -51,7 +51,7 @@ public class TaskRepositoryTest {
 
     @Test
     void editTask() throws SQLException {
-        Task task = taskRepository.findTaskByTaskId(1);
+        Task task = taskRepository.findTaskByTaskId(2);
         task.setTaskName("Updated Task Name");
         task.setEndDate(LocalDate.now().plusDays(2));
         taskRepository.editTask(task, 1);
@@ -64,14 +64,14 @@ public class TaskRepositoryTest {
     @Test
     void findTaskByTaskId() throws SQLException {
 
-        Task task = taskRepository.findTaskByTaskId(1);
-        assertEquals(1, task.getTaskId());
+        Task task = taskRepository.findTaskByTaskId(3);
+        assertEquals(3, task.getTaskId());
     }
 
     @Test
     void markTaskAsCompleted() throws SQLException {
-        taskRepository.markTaskAsCompleted(1);
-        Task completedTask = taskRepository.findTaskByTaskId(1);
+        taskRepository.markTaskAsCompleted(4);
+        Task completedTask = taskRepository.findTaskByTaskId(4);
         assertEquals("Færdig", completedTask.getStatus());
     }
 /*
