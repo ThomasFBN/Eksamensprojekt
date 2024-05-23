@@ -69,7 +69,7 @@ public class UserRepositoryTest {
     void createUser() throws SQLException {
         User user = new User("testuser123", "password", "admin");
         userRepository.createUser(user);
-        assertNotNull(user.getUser_ID());
+        assertNotNull(user.getUsername());
     }
 
 }

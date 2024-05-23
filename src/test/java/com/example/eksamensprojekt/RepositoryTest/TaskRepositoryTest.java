@@ -24,7 +24,7 @@ public class TaskRepositoryTest {
 
     @Test
     void createTask() throws SQLException {
-        Task task = new Task("Test Task",2, LocalDate.now(), LocalDate.now().plusDays(1), 8, "I gang");
+        Task task = new Task("Test Task",1, LocalDate.now(), LocalDate.now().plusDays(1), 8, "I gang");
         taskRepository.createTask(task);
         assertNotNull(task.getTaskId());
     }
