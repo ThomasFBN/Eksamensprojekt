@@ -32,7 +32,6 @@ public class TaskRepositoryTest {
     @Test
     void showAllTasks() throws SQLException {
         List<Task> tasks = taskRepository.showAllTasks(1);
-        assertNotNull(tasks);
         assertTrue(tasks.size() > 0);
     }
 
@@ -53,7 +52,6 @@ public class TaskRepositoryTest {
     @Test
     void editTask() throws SQLException {
         Task task = taskRepository.findTaskByTaskId(1);
-        assertNotNull(task);
         task.setTaskName("Updated Task Name");
         task.setEndDate(LocalDate.now().plusDays(2));
         taskRepository.editTask(task, 1);
@@ -66,7 +64,6 @@ public class TaskRepositoryTest {
     @Test
     void findTaskByTaskId() throws SQLException {
         Task task = taskRepository.findTaskByTaskId(1);
-        assertNotNull(task);
         assertEquals(1, task.getTaskId());
     }
 
@@ -74,7 +71,6 @@ public class TaskRepositoryTest {
     void markTaskAsCompleted() throws SQLException {
         taskRepository.markTaskAsCompleted(1);
         Task completedTask = taskRepository.findTaskByTaskId(1);
-        assertNotNull(completedTask);
         assertEquals("Færdig", completedTask.getStatus());
     }
 /*
