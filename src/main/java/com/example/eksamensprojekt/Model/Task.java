@@ -21,14 +21,13 @@ public class Task {
     public Task() {
     }
 
-    public Task(String taskName, int subprojectId, LocalDate startDate, LocalDate endDate, int estTime, String status, int userId) {
+    public Task(String taskName, int subprojectId, LocalDate startDate, LocalDate endDate, int estTime, String status) {
         this.taskName = taskName;
         this.subprojectId = subprojectId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.estTime = estTime;
         this.status = status;
-        this.userId = userId;
     }
 
     public Task(String taskName, LocalDate startDate, LocalDate endDate, int estTime, String status) {

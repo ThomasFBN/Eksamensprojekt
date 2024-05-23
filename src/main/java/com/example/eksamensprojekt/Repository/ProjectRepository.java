@@ -1,5 +1,4 @@
 package com.example.eksamensprojekt.Repository;
-
 import com.example.eksamensprojekt.Model.Project;
 import com.example.eksamensprojekt.Model.SubProject;
 import com.example.eksamensprojekt.util.ConnectionManager;
