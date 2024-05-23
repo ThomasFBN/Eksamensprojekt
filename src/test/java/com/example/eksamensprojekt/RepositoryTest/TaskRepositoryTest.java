@@ -51,11 +51,11 @@ public class TaskRepositoryTest {
 
     @Test
     void editTask() throws SQLException {
-        Task task = taskRepository.findTaskByTaskId(2);
+        Task task = taskRepository.findTaskByTaskId(5);
         task.setTaskName("Updated Task Name");
         task.setEndDate(LocalDate.now().plusDays(2));
         taskRepository.editTask(task, 2);
-        Task updatedTask = taskRepository.findTaskByTaskId(2);
+        Task updatedTask = taskRepository.findTaskByTaskId(5);
         assertNotNull(updatedTask);
         assertEquals("Updated Task Name", updatedTask.getTaskName());
         assertEquals(LocalDate.now().plusDays(2), updatedTask.getEndDate());
