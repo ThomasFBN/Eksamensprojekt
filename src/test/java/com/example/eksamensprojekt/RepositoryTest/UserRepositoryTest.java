@@ -65,6 +65,7 @@ public class UserRepositoryTest {
         assertNotNull(users);
         assertFalse(users.isEmpty());
     }
+
     @Test
     void createUser() throws SQLException {
         User user = new User("createdUserTest", "password", "admin");
