@@ -24,14 +24,14 @@ public class TaskRepositoryTest {
 
     @Test
     void createTask() throws SQLException {
-        Task task = new Task("Test Task",1, LocalDate.now(), LocalDate.now().plusDays(1), 8, "I gang");
+        Task task = new Task("Test Task",5, LocalDate.now(), LocalDate.now().plusDays(1), 8, "I gang");
         taskRepository.createTask(task);
         assertNotNull(task.getTaskName());
     }
 
     @Test
     void showAllTasks() throws SQLException {
-        List<Task> tasks = taskRepository.showAllTasks(1);
+        List<Task> tasks = taskRepository.showAllTasks(3);
         assertFalse(tasks.isEmpty());
     }
 
