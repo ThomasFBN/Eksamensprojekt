@@ -1,7 +1,9 @@
 package com.example.eksamensprojekt.RepositoryTest;
 
 import com.example.eksamensprojekt.Model.Task;
+import com.example.eksamensprojekt.Model.User;
 import com.example.eksamensprojekt.Repository.TaskRepository;
+import com.example.eksamensprojekt.Repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -75,15 +77,19 @@ public class TaskRepositoryTest {
 /*
     @Test
     void assignUserToTask() throws SQLException {
+        User user = new User("test1", "password", "employee");
+        userRepository.createUser(user);
 
-        taskRepository.assignUserToTask(1, 1);
-        Task assignedTask = taskRepository.findTaskByTaskId(1);
+        taskRepository.assignUserToTask(5, user.getUser_ID());
+        Task assignedTask = taskRepository.findTaskByTaskId(5);
 
         assertNotNull(assignedTask);
-        assertEquals(1, assignedTask.getUserId());
+        assertEquals(user.getUser_ID(), assignedTask.getUserId());
     }
 
  */
+
+
 
 
 
