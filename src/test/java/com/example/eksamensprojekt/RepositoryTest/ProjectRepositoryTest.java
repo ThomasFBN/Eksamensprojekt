@@ -29,6 +29,7 @@ public class ProjectRepositoryTest {
         assertEquals(2, project.getProject_id());
 
     }
+
     @Test
     void createProject() throws SQLException {
         Project project = new Project("Test Project", "i gang");
@@ -58,13 +59,13 @@ public class ProjectRepositoryTest {
         int projectId = 1;
         projectRepository.editProject(project, projectId);
     }
-@Test
+
+    @Test
     void deleteProject() throws SQLException {
         projectRepository.deleteProject(1);
         Project deletedProject = projectRepository.findProjectById(1);
         assertNull(deletedProject);
     }
-
 
 
 }
