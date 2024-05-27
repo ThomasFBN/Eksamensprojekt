@@ -1,9 +1,7 @@
 package com.example.eksamensprojekt.RepositoryTest;
 
 import com.example.eksamensprojekt.Model.Task;
-import com.example.eksamensprojekt.Model.User;
 import com.example.eksamensprojekt.Repository.TaskRepository;
-import com.example.eksamensprojekt.Repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -74,7 +72,7 @@ public class TaskRepositoryTest {
         Task completedTask = taskRepository.findTaskByTaskId(5);
         assertEquals("Færdig", completedTask.getStatus());
     }
-/*
+/* ## VIRKER IKKE PÅ NUVÆRENDE TIDSPUNKT:
     @Test
     void assignUserToTask() throws SQLException {
         User user = new User("test1", "password", "employee");

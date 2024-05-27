@@ -1,13 +1,11 @@
 package com.example.eksamensprojekt.Model;
 
-import java.util.List;
 
 public class User {
     private String username;
     private String password;
     private String role;
     private int user_ID;
-    private List<User> userList;
 
     public User() {
 
@@ -51,11 +49,4 @@ public class User {
         this.user_ID = user_ID;
     }
 
-    public void setUserList(List<User> userList) {
-        userList = userList;
-    }
-
-    public List<User> getuserList() {
-        return userList;
-    }
 }

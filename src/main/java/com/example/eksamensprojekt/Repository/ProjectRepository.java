@@ -43,33 +43,7 @@ public class ProjectRepository {
         }
     }
 
-    /*public List<Project> findProjectsByUserId(int userId) throws SQLException {
-        List<Project> projects = new ArrayList<>();
-        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
 
-        String SQL = "SELECT p.project_id, " + "p.projectName, " + "p.status, " +
-                "COUNT(DISTINCT sp.subproject_id) AS subproject_count, " +
-                "COUNT(DISTINCT t.user_id) AS user_count " + "FROM projects p " +
-                "LEFT JOIN subprojects sp ON p.project_id = sp.project_id " +
-                "LEFT JOIN tasks t ON sp.subproject_id = t.subproject_id " + "WHERE p.user_id = ? " +
-                "GROUP BY p.project_id, p.projectName, p.status";
-
-        try (PreparedStatement projectsPS = connection.prepareStatement(SQL)) {
-            projectsPS.setInt(1, userId);
-            ResultSet projectsRS = projectsPS.executeQuery();
-            while (projectsRS.next()) {
-                Project project = new Project();
-                project.setProject_id(projectsRS.getInt("project_id"));
-                project.setProjectName(projectsRS.getString("projectName"));
-                project.setStatus(projectsRS.getString("status"));
-                project.setUserCount(projectsRS.getInt("user_count"));
-                project.setSubProjectCount(projectsRS.getInt("subproject_count"));
-
-                projects.add(project);
-            }
-        }
-        return projects;
-    } */
 
     public List<Project> findProjectsByUserId(int userId) throws SQLException {
         List<Project> projects = new ArrayList<>();
@@ -166,49 +140,6 @@ public class ProjectRepository {
         }
     }
 
-/*
-    public List<Project> showUserProjects(int userId) throws SQLException {
-        List<Project> projects = new ArrayList<>();
-        Connection connection = ConnectionManager.getConnection(db_url, db_username, db_password);
-
-        String taskSQL = "SELECT * FROM tasks WHERE user_id = ?";
-        try (PreparedStatement taskPS = connection.prepareStatement(taskSQL)) {
-            taskPS.setInt(1, userId);
-            ResultSet taskRS = taskPS.executeQuery();
-
-            while (taskRS.next()) {
-                int subprojectId = taskRS.getInt("subproject_id");
-
-                String subprojectSQL = "SELECT * FROM subprojects WHERE subproject_id = ?";
-                try (PreparedStatement subprojectPS = connection.prepareStatement(subprojectSQL)) {
-                    subprojectPS.setInt(1, subprojectId);
-                    ResultSet subprojectRS = subprojectPS.executeQuery();
-
-                    if (subprojectRS.next()) {
-                        int projectId = subprojectRS.getInt("project_id");
-
-                        String projectSQL = "SELECT * FROM projects WHERE project_id = ?";
-                        try (PreparedStatement projectPS = connection.prepareStatement(projectSQL)) {
-                            projectPS.setInt(1, projectId);
-                            ResultSet projectRS = projectPS.executeQuery();
-
-                            if (projectRS.next()) {
-                                Project project = new Project();
-                                project.setProject_id(projectRS.getInt("project_id"));
-                                project.setProjectName(projectRS.getString("projectName"));
-                                project.setStatus(projectRS.getString("status"));
-                                projects.add(project);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return projects;
-    }
-
- */
 
 
 }

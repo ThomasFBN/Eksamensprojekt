@@ -2,7 +2,6 @@ package com.example.eksamensprojekt.RepositoryTest;
 
 import com.example.eksamensprojekt.Model.Project;
 import com.example.eksamensprojekt.Model.SubProject;
-import com.example.eksamensprojekt.Model.Task;
 import com.example.eksamensprojekt.Repository.ProjectRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
