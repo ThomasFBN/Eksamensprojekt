@@ -32,28 +32,29 @@ Before setting up the program, please ensure that you have access to the followi
 
 1. **Clone the repository:**
 - https://github.com/ThomasFBN/Eksamensprojekt
-Import SQL script:
 
-Import the SQL script into your preferred database server application.
-Run the SQL script:
+2. **Import SQL script:**
+ Import the SQL script into your preferred database server application.
 
+3. **Run the SQL script:**
 Ensure the database is set up correctly by running the SQL script provided in the repository.
-Modify application.properties:
 
+4. **Modify application.properties:**
 Ensure the active profile is set to local. This will ensure the application runs on localhost.
 properties
 spring.profiles.active=local
 
-Match the database information to your own setup.
+
+5. **Match the database information to your own setup.**
 properties:
 spring.datasource.url=jdbc:mysql://localhost:3306/your_database_name
 spring.datasource.username=your_database_username
 spring.datasource.password=your_database_password
 
-Run the application.
+6. **Run the application.**
+   Head to EksamensprojektApplication and start the program
 
-Access the application:
-
+7**Access the application:**
 Open a web browser and navigate to the specified port (usually http://localhost:8080).
 Now, you can use the application as intended.
 
