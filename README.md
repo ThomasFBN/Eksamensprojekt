@@ -54,7 +54,7 @@ spring.datasource.password=your_database_password
 6. **Run the application.**
    Head to EksamensprojektApplication and start the program
 
-7**Access the application:**
+7. **Access the application:**
 Open a web browser and navigate to the specified port (usually http://localhost:8080).
 Now, you can use the application as intended.
 
