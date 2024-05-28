@@ -36,7 +36,7 @@ If you have ideas for enhancements or new features, please create an issue in th
 - Reviewing Process
 - Pull requests will be reviewed by the project maintainers. Feedback will be provided, and changes may be requested before the pull request is merged. Please be responsive to feedback and make the necessary updates.
 
-###Community Guidelines
+### Community Guidelines
 - Be respectful and considerate of others.
 - Provide constructive feedback.
 - Focus on the content of issues and pull requests, not on the person making the contribution.
